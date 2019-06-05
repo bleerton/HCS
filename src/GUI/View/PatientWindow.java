@@ -156,6 +156,11 @@ public class PatientWindow extends javax.swing.JFrame {
         myPatients.setPreferredSize(new java.awt.Dimension(47, 15));
         myPatients.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/MyPatientsHover.png"))); // NOI18N
         myPatients.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/MyPatientsClicked.png"))); // NOI18N
+        myPatients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myPatientsActionPerformed(evt);
+            }
+        });
 
         documentButton.setBackground(new java.awt.Color(255, 255, 255));
         documentButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -434,6 +439,10 @@ public class PatientWindow extends javax.swing.JFrame {
     private void appointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentsButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_appointmentsButtonActionPerformed
+
+    private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myPatientsActionPerformed
 
     /**
      * @param args the command line arguments

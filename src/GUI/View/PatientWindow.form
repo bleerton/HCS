@@ -313,6 +313,9 @@
               <Image iconType="3" name="/ButtonsFolder/Clicked/MyPatientsClicked.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myPatientsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="documentButton">
           <Properties>

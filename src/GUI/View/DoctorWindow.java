@@ -442,7 +442,13 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsLabelMouseDragged
 
     private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
-
+        MyPatients m = new MyPatients(); 
+        m.setDoctor_ID(this.doctor_ID_Profile);
+        terminateFrames();
+        desktopPane.add(m) ;
+        m.show();
+        
+        
     }//GEN-LAST:event_myPatientsActionPerformed
 
     /**

@@ -47,17 +47,6 @@ public class AppointmentTableModel extends AbstractTableModel{
         return list.get(index);
     }
     
-    public String turnDate(Date d){
-        String theDate = d.toString();
-        System.out.println(theDate);
-        String date1 = null;
-        try { 
-            date1=new SimpleDateFormat("yyyy/MM/dd").parse(theDate).toString();
-        } catch (ParseException ex) {
-            Logger.getLogger(AppointmentTableModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return date1;
-    }
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -72,7 +61,7 @@ public class AppointmentTableModel extends AbstractTableModel{
             case 3:
                 return a.getLocation();
             case 4:
-                return turnDate(a.getDateTime());
+                return a.getDateTime();
             case 5:
                 return a.getDoctorID().getFirstName()+" "+a.getDoctorID().getLastName();
                 case 6:

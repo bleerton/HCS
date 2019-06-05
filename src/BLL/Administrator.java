@@ -10,13 +10,11 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Administrator")
@@ -46,8 +44,6 @@ public class Administrator implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "AdministratorID")
-    @GeneratedValue(generator = "InvSeq")
-    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer administratorID;
     @Basic(optional = false)
     @Column(name = "First_Name")
@@ -68,12 +64,14 @@ public class Administrator implements Serializable {
     @Basic(optional = false)
     @Column(name = "Sex")
     private String sex;
+    @Basic(optional = false)
     @Column(name = "Username")
     private String username;
+    @Basic(optional = false)
     @Column(name = "Password")
     private String password;
     @JoinColumn(name = "Login_ID", referencedColumnName = "LoginID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Login loginID;
 
     public Administrator() {
@@ -83,7 +81,7 @@ public class Administrator implements Serializable {
         this.administratorID = administratorID;
     }
 
-    public Administrator(Integer administratorID, String firstName, String lastName, Date dateOfbirth, String phoneNumber, String email, String sex) {
+    public Administrator(Integer administratorID, String firstName, String lastName, Date dateOfbirth, String phoneNumber, String email, String sex, String username, String password) {
         this.administratorID = administratorID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,6 +89,8 @@ public class Administrator implements Serializable {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.sex = sex;
+        this.username = username;
+        this.password = password;
     }
 
     public Integer getAdministratorID() {
