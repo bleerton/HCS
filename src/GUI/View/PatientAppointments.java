@@ -144,9 +144,6 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(250, 250, 250));
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setMaximumSize(new java.awt.Dimension(1079, 809));
         setMinimumSize(new java.awt.Dimension(1079, 809));
         setPreferredSize(new java.awt.Dimension(1079, 809));
@@ -355,11 +352,19 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
 
     private void requestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonActionPerformed
         try {
+            List<Appointment> allAppointments = ar.findAll();
+            
             Patient p = findPatientByID(this.patientID_Table);
             Request r = new Request();
             r.setDoctorID(((Doctor) doctorComboBox.getSelectedItem()));
             r.setPatientID(p);
             r.setStatus("Pending");
+            for (Appointment app: allAppointments) {
+                if ( (app.getDoctorID().getDoctorID() == r.getDoctorID().getDoctorID()) && (app.getPatientID().getPatientID() == r.getPatientID().getPatientID()) ) {
+                    JOptionPane.showMessageDialog(this,"Can t create a new request while u have an appointment with this ID");
+                    return;
+                }
+            }
             if (!Request.exists(r)) {
                 rr.create(r);
             }else{

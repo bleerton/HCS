@@ -10,10 +10,12 @@ import BLL.Request;
 import DAL.AppointmentRepository;
 import DAL.HealthException;
 import DAL.RequestRepository;
+import GUI.Model.AppointmentTableModel;
 import GUI.Model.RequestTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,9 +81,6 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
         table = new javax.swing.JTable();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setMaximumSize(new java.awt.Dimension(1079, 809));
         setMinimumSize(new java.awt.Dimension(1079, 809));
         setPreferredSize(new java.awt.Dimension(1079, 809));
@@ -182,14 +181,25 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+//    public Date turnDate(String d){
+//        System.out.println(d);
+//        Date date1 = null;
+//        try { 
+//            date1=new SimpleDateFormat("yyyy/MM/dd").parse(d);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(AppointmentTableModel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return date1;
+//    }
+    
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         int row = table.getSelectedRow();
         if (row == -1) {
@@ -206,7 +216,8 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                 app.setStatus("Confirmed");
                 app.setDoctorID(r.getDoctorID());
 
-                app.setDateTime(null);
+                app.setDateTime();  /// qitu duhet me qit prej ni textfield datetime
+                
                 app.setNote("BLertoni is gay");
                 app.setLocation("nisi is hoeeeeeeeeeee");
 
@@ -216,6 +227,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "New Appointment Created");
                 } else {
                     JOptionPane.showMessageDialog(this, "U already created an appointment with this ID");
+                    rr.delete(r);
                     loadTable();
                     return;
                 }

@@ -6,7 +6,12 @@
 package GUI.Model;
 
 import BLL.Appointment;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class AppointmentTableModel extends AbstractTableModel{
@@ -41,6 +46,19 @@ public class AppointmentTableModel extends AbstractTableModel{
     public Appointment getAppointment(int index){
         return list.get(index);
     }
+    
+    public String turnDate(Date d){
+        String theDate = d.toString();
+        System.out.println(theDate);
+        String date1 = null;
+        try { 
+            date1=new SimpleDateFormat("yyyy/MM/dd").parse(theDate).toString();
+        } catch (ParseException ex) {
+            Logger.getLogger(AppointmentTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return date1;
+    }
+    
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Appointment a = list.get(rowIndex);
@@ -54,7 +72,7 @@ public class AppointmentTableModel extends AbstractTableModel{
             case 3:
                 return a.getLocation();
             case 4:
-                return a.getDateTime();
+                return turnDate(a.getDateTime());
             case 5:
                 return a.getDoctorID().getFirstName()+" "+a.getDoctorID().getLastName();
                 case 6:

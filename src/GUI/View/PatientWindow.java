@@ -8,12 +8,14 @@ package GUI.View;
 import BLL.Patient;
 import DAL.HealthException;
 import DAL.PatientRepository;
+import java.awt.Desktop;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JRootPane;
 
 /**
@@ -376,15 +378,24 @@ public class PatientWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
-        // TODO add your handling code here:
+        LoginSettings a = new LoginSettings();
+        desktopPane.add(a);
     }//GEN-LAST:event_menuButtonActionPerformed
 
     private void favouriteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favouriteButtonActionPerformed
            
     }//GEN-LAST:event_favouriteButtonActionPerformed
 
+    public void terminateFrames(){
+        JInternalFrame[] allFrames = desktopPane.getAllFrames();
+        for (int i = 0; i < allFrames.length; i++) {
+                desktopPane.remove(allFrames[i]);
+        }
+    }
+    
     private void appointmentsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsButtonMouseClicked
         PatientAppointments app = new PatientAppointments();
+        this.terminateFrames();
         app.putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
         app.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         try {

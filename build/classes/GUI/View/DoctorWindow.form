@@ -338,9 +338,9 @@
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ButtonsFolder/ButtonBackground/DocumentsButton.png"/>
+              <Image iconType="3" name="/ButtonsFolder/ButtonBackground/scheduleButton.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="        Documents"/>
+            <Property name="text" type="java.lang.String" value="      Scheduler"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -349,10 +349,10 @@
               <Dimension value="[47, 15]"/>
             </Property>
             <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ButtonsFolder/Hovers/DocumentsHover.png"/>
+              <Image iconType="3" name="/ButtonsFolder/Hovers/schedulerHover.png"/>
             </Property>
             <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/ButtonsFolder/Clicked/DocumentsClicked.png"/>
+              <Image iconType="3" name="/ButtonsFolder/Clicked/schedulerButton.png"/>
             </Property>
           </Properties>
           <Events>

@@ -27,23 +27,47 @@ public class LoginSettings extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setMaximumSize(new java.awt.Dimension(208, 215));
-        setMinimumSize(new java.awt.Dimension(208, 215));
-        setPreferredSize(new java.awt.Dimension(208, 215));
+        myProfileButton = new javax.swing.JButton();
+        settingsButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
+
+        setMaximumSize(new java.awt.Dimension(208, 75));
+        setMinimumSize(new java.awt.Dimension(208, 75));
+        setPreferredSize(new java.awt.Dimension(208, 75));
+
+        myProfileButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        myProfileButton.setText("My Profile");
+
+        settingsButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        settingsButton.setText("Settings");
+
+        logoutButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        logoutButton.setText("Logout");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 208, Short.MAX_VALUE)
+            .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+            .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(myProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(2, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JButton myProfileButton;
+    private javax.swing.JButton settingsButton;
     // End of variables declaration//GEN-END:variables
 }

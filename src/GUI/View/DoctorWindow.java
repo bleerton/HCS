@@ -1,6 +1,5 @@
 package GUI.View;
 
-
 import BLL.Doctor;
 import DAL.DoctorRepository;
 import DAL.HealthException;
@@ -9,29 +8,31 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Enis
  */
 public class DoctorWindow extends javax.swing.JFrame {
-    public void changeProfileLabel(String firstname){
-        if (!firstname.trim().isEmpty() ) {
-            nameLabel.setText(firstname+" ");
+
+    public void changeProfileLabel(String firstname) {
+        if (!firstname.trim().isEmpty()) {
+            nameLabel.setText(firstname + " ");
         }
     }
-    
+
     private int doctor_ID_Profile;
-    
-    public void setDoctorIDProfile(int doctorID){
+
+    public void setDoctorIDProfile(int doctorID) {
         this.doctor_ID_Profile = doctorID;
     }
+
     /**
      * Creates new form MainWindow
      */
@@ -42,17 +43,24 @@ public class DoctorWindow extends javax.swing.JFrame {
         setVisible(true);
 
     }
-    
-    public Doctor findDoctorByID(int id) throws HealthException{
+
+    public Doctor findDoctorByID(int id) throws HealthException {
         DoctorRepository pr = new DoctorRepository();
         List<Doctor> list = pr.findAll();
         for (int i = 0; i < list.size(); i++) {
-           
-            if (list.get(i).getDoctorID()== id) {
+
+            if (list.get(i).getDoctorID() == id) {
                 return list.get(i);
             }
         }
         return null;
+    }
+
+    public void terminateFrames() {
+        JInternalFrame[] allFrames = desktopPane.getAllFrames();
+        for (int i = 0; i < allFrames.length; i++) {
+            desktopPane.remove(allFrames[i]);
+        }
     }
 
     /**
@@ -170,13 +178,13 @@ public class DoctorWindow extends javax.swing.JFrame {
 
         documentButton.setBackground(new java.awt.Color(255, 255, 255));
         documentButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        documentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/DocumentsButton.png"))); // NOI18N
-        documentButton.setText("        Documents");
+        documentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/scheduleButton.png"))); // NOI18N
+        documentButton.setText("      Scheduler");
         documentButton.setBorder(null);
         documentButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         documentButton.setPreferredSize(new java.awt.Dimension(47, 15));
-        documentButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/DocumentsHover.png"))); // NOI18N
-        documentButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/DocumentsClicked.png"))); // NOI18N
+        documentButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/schedulerHover.png"))); // NOI18N
+        documentButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/schedulerButton.png"))); // NOI18N
         documentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 documentButtonActionPerformed(evt);
@@ -397,15 +405,17 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_menuButtonActionPerformed
 
     private void requestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonActionPerformed
-           DoctorAppointments d = new DoctorAppointments();
-           d.setDoctorIDTable(this.doctor_ID_Profile);
+        DoctorAppointments d = new DoctorAppointments();
+        terminateFrames();
+        d.setDoctorIDTable(this.doctor_ID_Profile);
         desktopPane.add(d);
         d.loadTable();
         d.show();
     }//GEN-LAST:event_requestButtonActionPerformed
 
     private void documentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentButtonActionPerformed
-        Documents d = new Documents();
+        SchedulerFrame d = new SchedulerFrame();
+        terminateFrames();
         desktopPane.add(d);
         d.show();
     }//GEN-LAST:event_documentButtonActionPerformed
@@ -421,7 +431,8 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_profilePanelMouseExited
 
     private void newReportButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newReportButtonMouseClicked
-        Report d = new Report();
+        ReportForm d = new ReportForm();
+        terminateFrames();
         desktopPane.add(d);
         d.show();
     }//GEN-LAST:event_newReportButtonMouseClicked
@@ -431,7 +442,7 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsLabelMouseDragged
 
     private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
-        
+
     }//GEN-LAST:event_myPatientsActionPerformed
 
     /**

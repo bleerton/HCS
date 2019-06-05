@@ -35,13 +35,25 @@ public class NotificationFrame extends javax.swing.JFrame {
             @Override
             public void run() {
                 for (int i = 0; i < getHeight(); i++) {
-                    setLocation(screenSize.width - getWidth(), screenSize.height - toolHeight.top - i);
+                    setLocation(screenSize.width - getWidth(), (toolHeight.top + i) - getHeight());
+                    if (i == getHeight() - 1) {
+                        try {
+                            Thread.sleep(2000);
+                            for (int j =0; j < getHeight(); j++) {
+                                setLocation(screenSize.width - getWidth(), (toolHeight.top) - j);
+                                Thread.sleep(10);
+                            }
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(NotificationFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(NotificationFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                setVisible(false);
             }
         }) {
 
