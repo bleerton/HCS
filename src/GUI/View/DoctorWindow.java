@@ -58,8 +58,8 @@ public class DoctorWindow extends javax.swing.JFrame {
 
     public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
-        for (int i = 0; i < allFrames.length; i++) {
-            desktopPane.remove(allFrames[i]);
+        for (JInternalFrame allFrame : allFrames) {
+            desktopPane.remove(allFrame);
         }
     }
 
@@ -119,7 +119,7 @@ public class DoctorWindow extends javax.swing.JFrame {
         menuButton.setBackground(new java.awt.Color(255, 255, 255));
         menuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         menuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MenuButton.png"))); // NOI18N
-        menuButton.setText("Menu");
+        menuButton.setText("      Today");
         menuButton.setBorder(null);
         menuButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         menuButton.setPreferredSize(new java.awt.Dimension(47, 15));
@@ -442,13 +442,12 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsLabelMouseDragged
 
     private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
-        MyPatients m = new MyPatients(); 
-        m.setDoctor_ID(this.doctor_ID_Profile);
-        terminateFrames();
-        desktopPane.add(m) ;
-        m.show();
-        
-        
+            MyPatientsFrame a = new MyPatientsFrame();
+            terminateFrames();
+            a.setDoctorIDTable(this.doctor_ID_Profile);
+            desktopPane.add(a);
+            a.show();
+            a.loadTable();
     }//GEN-LAST:event_myPatientsActionPerformed
 
     /**

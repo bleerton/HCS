@@ -71,7 +71,7 @@ public class PatientWindow extends javax.swing.JFrame {
         };
         profilePanel = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
-        settingsLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         profileInfoPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -100,7 +100,7 @@ public class PatientWindow extends javax.swing.JFrame {
         menuButton.setBackground(new java.awt.Color(255, 255, 255));
         menuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         menuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MenuButton.png"))); // NOI18N
-        menuButton.setText("Menu");
+        menuButton.setText("Home");
         menuButton.setBorder(null);
         menuButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         menuButton.setPreferredSize(new java.awt.Dimension(47, 15));
@@ -156,11 +156,6 @@ public class PatientWindow extends javax.swing.JFrame {
         myPatients.setPreferredSize(new java.awt.Dimension(47, 15));
         myPatients.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/MyPatientsHover.png"))); // NOI18N
         myPatients.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/MyPatientsClicked.png"))); // NOI18N
-        myPatients.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myPatientsActionPerformed(evt);
-            }
-        });
 
         documentButton.setBackground(new java.awt.Color(255, 255, 255));
         documentButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -245,27 +240,32 @@ public class PatientWindow extends javax.swing.JFrame {
             }
         });
 
-        settingsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/gear.png"))); // NOI18N
-        settingsLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/logginButton.png"))); // NOI18N
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setMaximumSize(new java.awt.Dimension(44, 32));
+        jButton1.setMinimumSize(new java.awt.Dimension(44, 32));
+        jButton1.setPreferredSize(new java.awt.Dimension(44, 32));
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/logginButton.png"))); // NOI18N
+        jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/login2.png"))); // NOI18N
 
         javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
         profilePanel.setLayout(profilePanelLayout);
         profilePanelLayout.setHorizontalGroup(
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profilePanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(settingsLabel)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         profilePanelLayout.setVerticalGroup(
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(settingsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nameLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profilePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         profileInfoPanel.setBackground(new java.awt.Color(250, 250, 250));
@@ -281,7 +281,7 @@ public class PatientWindow extends javax.swing.JFrame {
         );
         profileInfoPanelLayout.setVerticalGroup(
             profileInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
         );
 
         fileMenu.setMnemonic('f');
@@ -363,7 +363,7 @@ public class PatientWindow extends javax.swing.JFrame {
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(profilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profileInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,7 +372,7 @@ public class PatientWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE))
+                .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
         );
 
         pack();
@@ -440,10 +440,6 @@ public class PatientWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_appointmentsButtonActionPerformed
 
-    private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myPatientsActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -493,6 +489,7 @@ public class PatientWindow extends javax.swing.JFrame {
     private javax.swing.JButton favouriteButton;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel mainPanel;
@@ -506,7 +503,6 @@ public class PatientWindow extends javax.swing.JFrame {
     private javax.swing.JPanel profilePanel;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
-    private javax.swing.JLabel settingsLabel;
     private javax.swing.JPanel sideMenuBar;
     // End of variables declaration//GEN-END:variables
 

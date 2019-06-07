@@ -7,7 +7,6 @@ package DAL;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import org.eclipse.persistence.internal.jpa.deployment.xml.parser.PersistenceContentHandler;
 
 /**
  *

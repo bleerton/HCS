@@ -76,8 +76,7 @@ public class ReportForm extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
+        setFrameIcon(null);
         setMaximumSize(new java.awt.Dimension(1079, 809));
         setMinimumSize(new java.awt.Dimension(1079, 809));
         setPreferredSize(new java.awt.Dimension(1079, 809));

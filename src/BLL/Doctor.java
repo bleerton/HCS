@@ -12,22 +12,19 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author bleer
- */
+
 @Entity
 @Table(name = "Doctor")
 @XmlRootElement
@@ -43,13 +40,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Doctor.findByEmail", query = "SELECT d FROM Doctor d WHERE d.email = :email")
     , @NamedQuery(name = "Doctor.findBySex", query = "SELECT d FROM Doctor d WHERE d.sex = :sex")
     , @NamedQuery(name = "Doctor.findByUsername", query = "SELECT d FROM Doctor d WHERE d.username = :username")
-    , @NamedQuery(name = "Doctor.findByPassword", query = "SELECT d FROM Doctor d WHERE d.password = :password")})
+    , @NamedQuery(name = "Doctor.findByPassword", query = "SELECT d FROM Doctor d WHERE d.password = :password")
+    , @NamedQuery(name = "Doctor.findByLoginID", query = "SELECT d FROM Doctor d WHERE d.loginID = :loginID")})
 public class Doctor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "DoctorID")
+    @GeneratedValue(generator="InvSeq")
+    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=1)
     private Integer doctorID;
     @Basic(optional = false)
     @Column(name = "First_Name")
@@ -80,15 +80,16 @@ public class Doctor implements Serializable {
     private String username;
     @Column(name = "Password")
     private String password;
+    @Column(name = "Login_ID")
+    private Integer loginID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
     private Collection<Appointment> appointmentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
     private Collection<Report> reportCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
     private Collection<Request> requestCollection;
-    @JoinColumn(name = "Login_ID", referencedColumnName = "LoginID")
-    @ManyToOne
-    private Login loginID;
+    @OneToMany(mappedBy = "doctorID")
+    private Collection<Patient> patientCollection;
 
     public Doctor() {
     }
@@ -197,6 +198,14 @@ public class Doctor implements Serializable {
         this.password = password;
     }
 
+    public Integer getLoginID() {
+        return loginID;
+    }
+
+    public void setLoginID(Integer loginID) {
+        this.loginID = loginID;
+    }
+
     @XmlTransient
     public Collection<Appointment> getAppointmentCollection() {
         return appointmentCollection;
@@ -224,12 +233,13 @@ public class Doctor implements Serializable {
         this.requestCollection = requestCollection;
     }
 
-    public Login getLoginID() {
-        return loginID;
+    @XmlTransient
+    public Collection<Patient> getPatientCollection() {
+        return patientCollection;
     }
 
-    public void setLoginID(Login loginID) {
-        this.loginID = loginID;
+    public void setPatientCollection(Collection<Patient> patientCollection) {
+        this.patientCollection = patientCollection;
     }
 
     @Override
@@ -254,7 +264,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName ;
+        return firstName+" "+lastName;
     }
     
 }

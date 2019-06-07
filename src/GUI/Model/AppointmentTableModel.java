@@ -6,27 +6,25 @@
 package GUI.Model;
 
 import BLL.Appointment;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
-public class AppointmentTableModel extends AbstractTableModel{
+public class AppointmentTableModel extends AbstractTableModel {
+
     List<Appointment> list;
-    String [] cols={"Appointment ID","First Name","Last Name","Location","Date","Doctor","Status"};
-    
-    
-    public AppointmentTableModel(){}
-    
-    public AppointmentTableModel(List<Appointment> list){
-        this.list=list;
+    String[] cols = {"Appointment ID", "First Name", "Last Name", "Location", "Date", "Doctor", "Status"};
+
+    public AppointmentTableModel() {
     }
-    public void addList(List<Appointment> list){
-        this.list=list;
+
+    public AppointmentTableModel(List<Appointment> list) {
+        this.list = list;
     }
+
+    public void addList(List<Appointment> list) {
+        this.list = list;
+    }
+
     @Override
     public int getRowCount() {
         return list.size();
@@ -36,22 +34,25 @@ public class AppointmentTableModel extends AbstractTableModel{
     public int getColumnCount() {
         return cols.length;
     }
+
     @Override
-    public String getColumnName(int col){
+    public String getColumnName(int col) {
         return cols[col];
     }
-    public void remove(int row){
+
+    public void remove(int row) {
         list.remove(row);
     }
-    public Appointment getAppointment(int index){
+
+    public Appointment getAppointment(int index) {
         return list.get(index);
     }
-    
-    
+
+
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Appointment a = list.get(rowIndex);
-        switch(columnIndex){
+        switch (columnIndex) {
             case 0:
                 return a.getAppointmentID();
             case 1:
@@ -63,8 +64,8 @@ public class AppointmentTableModel extends AbstractTableModel{
             case 4:
                 return a.getDateTime();
             case 5:
-                return a.getDoctorID().getFirstName()+" "+a.getDoctorID().getLastName();
-                case 6:
+                return a.getDoctorID().getFirstName() + " " + a.getDoctorID().getLastName();
+            case 6:
                 return a.getStatus();
             default:
                 return null;

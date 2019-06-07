@@ -13,20 +13,19 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author bleer
- */
+
 @Entity
 @Table(name = "Appointment")
 @XmlRootElement
@@ -45,6 +44,8 @@ public class Appointment implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "AppointmentID")
+    @GeneratedValue(generator="InvSeq")
+    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=1)
     private Integer appointmentID;
     @Basic(optional = false)
     @Column(name = "First_Name_Of_Patient")
@@ -116,6 +117,18 @@ public class Appointment implements Serializable {
     public void setLocation(String location) {
         this.location = location;
     }
+    
+    public static boolean exist(Appointment a) throws HealthException{
+        AppointmentRepository ar = new AppointmentRepository();
+        List<Appointment> all = ar.findAll();
+        for (Appointment appointment : all) {
+            if (appointment.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && appointment.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public Date getDateTime() {
         return dateTime;
@@ -181,14 +194,5 @@ public class Appointment implements Serializable {
     public String toString() {
         return "BLL.Appointment[ appointmentID=" + appointmentID + " ]";
     }
- public static boolean exist(Appointment a) throws HealthException{
-        AppointmentRepository ar = new AppointmentRepository();
-        List<Appointment> all = ar.findAll();
-        for (Appointment appointment : all) {
-            if (appointment.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && appointment.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
-                return true;
-            }
-        }
-        return false;
-    }   
+    
 }

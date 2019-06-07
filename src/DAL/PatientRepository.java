@@ -6,6 +6,7 @@
 package DAL;
 import BLL.Patient;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -56,8 +57,13 @@ public class PatientRepository extends EntMng implements PatientInterface{
 
     @Override
     public Patient findByID(Integer ID) throws HealthException {
-        throw new UnsupportedOperationException("Per ma vone !");
+        try {
+           Query q=em.createQuery("Select p from Patient p where p.patientID=:abcde");
+           q.setParameter("abcde",ID);
+           return (Patient)q.getSingleResult();
+        } catch (Exception e) {
+            throw new HealthException("Msg! \n" + e.getMessage());
+        }
     }
 
-   
 }

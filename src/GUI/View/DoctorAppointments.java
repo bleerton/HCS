@@ -6,19 +6,16 @@
 package GUI.View;
 
 import BLL.Appointment;
+import BLL.Patient;
 import BLL.Request;
 import DAL.AppointmentRepository;
 import DAL.HealthException;
+import DAL.PatientRepository;
 import DAL.RequestRepository;
-import GUI.Model.AppointmentTableModel;
 import GUI.Model.RequestTableModel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -77,6 +74,13 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
         confirmButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        locationText = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        dateChooser = new datechooser.beans.DateChooserCombo();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        noteText = new javax.swing.JTextArea();
         scrollPane = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
@@ -95,7 +99,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
         jLabel1.setText("Requested Appointments");
 
         cancelButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -107,10 +111,39 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Location :");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Date :");
+
+        dateChooser.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Note :");
+
+        noteText.setColumns(20);
+        noteText.setRows(5);
+        jScrollPane1.setViewportView(noteText);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(locationText, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(161, 161, 161)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -119,19 +152,30 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                         .addGap(222, 222, 222)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(locationText))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         scrollPane.setBackground(new java.awt.Color(250, 250, 250));
@@ -180,10 +224,9 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -200,6 +243,20 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
 //        return date1;
 //    }
     
+    public boolean anyIsEmpty(){
+        if (dateChooser == null) {
+            JOptionPane.showMessageDialog(this, "Date chooser is empty !");
+            return true;
+        }else if (noteText.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Note text is empty!");
+            return true;
+        }else if(locationText.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Note text is empty!");
+            return true;
+        }
+        return false;
+    }
+    
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         int row = table.getSelectedRow();
         if (row == -1) {
@@ -208,6 +265,8 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
             Request r = rtm.getRequest(row);
             r.setStatus("Confirmed");
             try {
+                
+                
                 rr.edit(r);
                 Appointment app = new Appointment();
                 app.setFirstNameOfPatient(r.getPatientID().getFirstName());
@@ -215,11 +274,21 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                 app.setPatientID(r.getPatientID());
                 app.setStatus("Confirmed");
                 app.setDoctorID(r.getDoctorID());
-
-//                app.setDateTime();  /// qitu duhet me qit prej ni textfield datetime
                 
-                app.setNote("BLertoni is gay");
-                app.setLocation("nisi is hoeeeeeeeeeee");
+                
+                ///// Kur confirmohet requesti nga doktorri qatij pacienti i regjistrohet doctorID i doktorrit?(qe osht logged in)
+                PatientRepository pr = new PatientRepository();
+                Patient patientOfThisAppointment = pr.findByID(app.getPatientID().getPatientID());
+                patientOfThisAppointment.setDoctorID(app.getDoctorID());
+                pr.edit(patientOfThisAppointment);
+                /////
+                if (anyIsEmpty()) {
+                    return;
+                }
+                app.setDateTime(this.dateChooser.getCurrent().getTime());  
+                
+                app.setNote(noteText.getText());
+                app.setLocation(locationText.getText());
 
                 if (!Appointment.exist(app)) {
                     ar.create(app);
@@ -235,6 +304,9 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Info:" + ex.getMessage());
             }
         }
+        locationText.setText("");
+        noteText.setText("");
+        dateChooser.setText("");
         loadTable();
 
     }//GEN-LAST:event_confirmButtonActionPerformed
@@ -265,8 +337,15 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
+    private datechooser.beans.DateChooserCombo dateChooser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField locationText;
+    private javax.swing.JTextArea noteText;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

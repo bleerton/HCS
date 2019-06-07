@@ -11,18 +11,17 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author bleer
- */
+
 @Entity
 @Table(name = "Login")
 @XmlRootElement
@@ -38,6 +37,8 @@ public class Login implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "LoginID")
+    @GeneratedValue(generator="InvSeq")
+    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=1)
     private Integer loginID;
     @Basic(optional = false)
     @Column(name = "Username")
@@ -52,8 +53,6 @@ public class Login implements Serializable {
     private Collection<Administrator> administratorCollection;
     @OneToMany(mappedBy = "loginId")
     private Collection<Patient> patientCollection;
-    @OneToMany(mappedBy = "loginID")
-    private Collection<Doctor> doctorCollection;
 
     public Login() {
     }
@@ -117,15 +116,6 @@ public class Login implements Serializable {
 
     public void setPatientCollection(Collection<Patient> patientCollection) {
         this.patientCollection = patientCollection;
-    }
-
-    @XmlTransient
-    public Collection<Doctor> getDoctorCollection() {
-        return doctorCollection;
-    }
-
-    public void setDoctorCollection(Collection<Doctor> doctorCollection) {
-        this.doctorCollection = doctorCollection;
     }
 
     @Override

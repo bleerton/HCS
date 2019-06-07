@@ -12,22 +12,21 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author bleer
- */
+
 @Entity
 @Table(name = "Patient")
 @XmlRootElement
@@ -49,6 +48,8 @@ public class Patient implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "PatientID")
+    @GeneratedValue(generator="InvSeq")
+    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=1)
     private Integer patientID;
     @Basic(optional = false)
     @Column(name = "First_Name")
@@ -83,6 +84,9 @@ public class Patient implements Serializable {
     private Collection<Report> reportCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
     private Collection<Request> requestCollection;
+    @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
+    @ManyToOne
+    private Doctor doctorID;
     @JoinColumn(name = "LoginId", referencedColumnName = "LoginID")
     @ManyToOne
     private Login loginId;
@@ -213,6 +217,14 @@ public class Patient implements Serializable {
         this.requestCollection = requestCollection;
     }
 
+    public Doctor getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(Doctor doctorID) {
+        this.doctorID = doctorID;
+    }
+
     public Login getLoginId() {
         return loginId;
     }
@@ -243,6 +255,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName ;
-    }    
+        return firstName+" "+lastName;
+    }
+    
 }
