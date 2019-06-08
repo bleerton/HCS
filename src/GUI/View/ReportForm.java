@@ -24,10 +24,11 @@ import javax.swing.JOptionPane;
  * @author Enis
  */
 public class ReportForm extends javax.swing.JInternalFrame {
+
     PatientComboBoxModel pcbm = new PatientComboBoxModel();
     PatientRepository pr = new PatientRepository();
     ConnectionRepository cr = new ConnectionRepository();
-    
+
     private int doctorID_Table;
 
     public void setDoctorIDTable(int ptd) {
@@ -37,7 +38,7 @@ public class ReportForm extends javax.swing.JInternalFrame {
     public int getDoctorIDTable() {
         return doctorID_Table;
     }
-    
+
     /**
      * Creates new form Report
      */
@@ -343,9 +344,7 @@ public class ReportForm extends javax.swing.JInternalFrame {
                         .addGap(3, 3, 3)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(patientNameText)))
+                    .addComponent(patientNameText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,7 +508,11 @@ public class ReportForm extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
-        
+        try {
+            loadLabels();
+        } catch (HealthException ex) {
+           return;
+        }
     }//GEN-LAST:event_comboBoxActionPerformed
 
     private void maleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleButtonActionPerformed
@@ -522,29 +525,44 @@ public class ReportForm extends javax.swing.JInternalFrame {
         maleButton.setSelected(false);
     }//GEN-LAST:event_femaleButtonActionPerformed
 
-    
-    
-    public void loadLabels() throws HealthException{
-    Patient p = (Patient)comboBox.getSelectedItem();
-        patientIDText.setText(p.getPatientID()+"");
-        patientNameText.setText(p.getFirstName());
-        patientLastNameText.setText(p.getLastName());
-        parentNameText.setText(p.getParentName());
-        patientAddressText.setText(p.getAddress());
-        if (p.getSex().equalsIgnoreCase("Female")) {
-            femaleButton.setSelected(true);
-            maleButton.setSelected(false);
-        }else{
-            maleButton.setSelected(true);
-            femaleButton.setSelected(false);
+    public void loadLabels() throws HealthException {
+        if (!hasPatients()) {
+            JOptionPane.showMessageDialog(this, "No Patient connected with this Doctor");
+            throw new HealthException("No patient is registered or connected with this doctor");
         }
-        DoctorRepository dr = new DoctorRepository();
-        Doctor d = dr.findByID(this.doctorID_Table);
-        doctorIDText.setText(d.getDoctorID()+"");
-        doctorLastName.setText(d.getLastName());
-        doctorNameText.setText(d.getFirstName());
-        doctorPhoneNumberText.setText(d.getPhoneNumber());
-            
+        try {
+            Patient p = (Patient) comboBox.getSelectedItem();
+            patientIDText.setText(p.getPatientID() + "");
+            patientNameText.setText(p.getFirstName());
+            patientLastNameText.setText(p.getLastName());
+            parentNameText.setText(p.getParentName());
+            patientAddressText.setText(p.getAddress());
+            if (p.getSex().equalsIgnoreCase("Female")) {
+                femaleButton.setSelected(true);
+                maleButton.setSelected(false);
+            } else {
+                maleButton.setSelected(true);
+                femaleButton.setSelected(false);
+            }
+            DoctorRepository dr = new DoctorRepository();
+            Doctor d = dr.findByID(this.doctorID_Table);
+            doctorIDText.setText(d.getDoctorID() + "");
+            doctorLastName.setText(d.getLastName());
+            doctorNameText.setText(d.getFirstName());
+            doctorPhoneNumberText.setText(d.getPhoneNumber());
+        } catch (NullPointerException ex) {
+        }
+    }
+    
+
+    public boolean hasPatients() throws HealthException{
+        List<Connection> connections = cr.findAll();
+        for (int i = 0; i < connections.size(); i++) {
+                if (connections.get(i).getDoctorID().getDoctorID() == this.doctorID_Table) {
+                    return true;
+                }
+            }
+        return false;
     }
     
     public void loadComboBox() {
@@ -555,7 +573,7 @@ public class ReportForm extends javax.swing.JInternalFrame {
                 if (connections.get(i).getDoctorID().getDoctorID() == this.doctorID_Table) {
                     arrList.add(connections.get(i).getPatientID());
                 }
-                
+
             }
             pcbm.add(arrList);
             comboBox.setModel(pcbm);

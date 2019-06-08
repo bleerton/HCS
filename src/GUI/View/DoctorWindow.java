@@ -91,6 +91,7 @@ public class DoctorWindow extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         settingsLabel = new javax.swing.JLabel();
         profileInfoPanel = new javax.swing.JPanel();
+        logoutButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -286,7 +287,7 @@ public class DoctorWindow extends javax.swing.JFrame {
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profilePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(settingsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -305,6 +306,28 @@ public class DoctorWindow extends javax.swing.JFrame {
         profileInfoPanel.setMaximumSize(new java.awt.Dimension(208, 746));
         profileInfoPanel.setMinimumSize(new java.awt.Dimension(208, 746));
         profileInfoPanel.setPreferredSize(new java.awt.Dimension(208, 746));
+
+        logoutButton.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/shutdown.png"))); // NOI18N
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout profileInfoPanelLayout = new javax.swing.GroupLayout(profileInfoPanel);
+        profileInfoPanel.setLayout(profileInfoPanelLayout);
+        profileInfoPanelLayout.setHorizontalGroup(
+            profileInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        profileInfoPanelLayout.setVerticalGroup(
+            profileInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileInfoPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -398,7 +421,7 @@ public class DoctorWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(MainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -450,7 +473,7 @@ public class DoctorWindow extends javax.swing.JFrame {
         try {
             d.loadLabels();
         } catch (HealthException ex) {
-            Logger.getLogger(DoctorWindow.class.getName()).log(Level.SEVERE, null, ex);
+            return;
         }
         d.show();
     }//GEN-LAST:event_newReportButtonMouseClicked
@@ -471,6 +494,11 @@ public class DoctorWindow extends javax.swing.JFrame {
     private void newReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newReportButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newReportButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        this.dispose();
+        new StartingPage().setVisible(true);
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -522,6 +550,7 @@ public class DoctorWindow extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton menuButton;
     private javax.swing.JButton myPatients;

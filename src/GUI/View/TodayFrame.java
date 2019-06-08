@@ -44,31 +44,31 @@ public class TodayFrame extends javax.swing.JInternalFrame {
     }
     
     public void loadTable() {
-//        try {
-//            List<Appointment> list = ar.findAll();
-//            // E KOM KRIJU NI LIST T RE PER ME TA QIT LISTEN E APPOINTMENTS VEQ PER QAT PACIENT QE OSHT LOGGED IN
-//            ArrayList<Appointment> listByID = new ArrayList<>();
-//            for (Appointment appointment : list) {
-//                if ((appointment.getPatientID()) == this.doctorID_Table) {
-////                    if (appointment.getDateTime().equals()) {     //QITU DUHET ME BO NESE I TAKON DATES SE SOTIT
-//                        String name = appointment.getPatientID().toString();
-//                        String dateOfBirth = appointment.getPatientID().getDateOfBirth().toString();
-//                        String sex = appointment.getPatientID().getSex();
-//                        String number = appointment.getPatientID().getPhoneNumber();
-//                        String address = appointment.getPatientID().getAddress();
-//                        
-//                        fillLabels(name, dateOfBirth, sex, number, address);
-//                        listByID.add(appointment);
-////                    }
-//                    
-//                }
-//            }
-//            atm.addList(listByID);
-//            table.setModel(atm);
-//            atm.fireTableDataChanged();
-//        } catch (HealthException ex) {
-//            JOptionPane.showMessageDialog(this, "Info:" + ex.getMessage());
-//        }
+        try {
+            List<Appointment> list = ar.findAll();
+            // E KOM KRIJU NI LIST T RE PER ME TA QIT LISTEN E APPOINTMENTS VEQ PER QAT PACIENT QE OSHT LOGGED IN
+            ArrayList<Appointment> listByID = new ArrayList<>();
+            for (Appointment appointment : list) {
+                if ((appointment.getDoctorID().getDoctorID()) == this.doctorID_Table) {
+//                    if (appointment.getDateTime().equals()) {     //QITU DUHET ME BO NESE I TAKON DATES SE SOTIT
+                        String name = appointment.getPatientID().toString();
+                        String dateOfBirth = appointment.getPatientID().getDateOfBirth().toString();
+                        String sex = appointment.getPatientID().getSex();
+                        String number = appointment.getPatientID().getPhoneNumber();
+                        String address = appointment.getPatientID().getAddress();
+                        
+                        fillLabels(name, dateOfBirth, sex, number, address);
+                        listByID.add(appointment);
+//                    }
+                    
+                }
+            }
+            atm.addList(listByID);
+            table.setModel(atm);
+            atm.fireTableDataChanged();
+        } catch (HealthException ex) {
+            JOptionPane.showMessageDialog(this, "Info:" + ex.getMessage());
+        }
     }
 
     /**
