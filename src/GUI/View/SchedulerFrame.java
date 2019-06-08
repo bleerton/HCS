@@ -29,10 +29,8 @@ public class SchedulerFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setMaximumSize(new java.awt.Dimension(1079, 809));
         setMinimumSize(new java.awt.Dimension(1079, 809));
         setPreferredSize(new java.awt.Dimension(1079, 809));

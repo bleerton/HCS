@@ -8,6 +8,7 @@ package BLL;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,7 +52,7 @@ public class Login implements Serializable {
     @Basic(optional = false)
     @Column(name = "Roli")
     private int roli;
-    @OneToMany(mappedBy = "loginID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "loginID")
     private Collection<Administrator> administratorCollection;
     @OneToMany(mappedBy = "loginId")
     private Collection<Patient> patientCollection;
@@ -155,5 +156,5 @@ public class Login implements Serializable {
     public String toString() {
         return "BLL.Login[ loginID=" + loginID + " ]";
     }
-
+    
 }

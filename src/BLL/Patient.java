@@ -6,10 +6,8 @@
 package BLL;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Patient.findByAddress", query = "SELECT p FROM Patient p WHERE p.address = :address")
     , @NamedQuery(name = "Patient.findByEmail", query = "SELECT p FROM Patient p WHERE p.email = :email")
     , @NamedQuery(name = "Patient.findByUsername", query = "SELECT p FROM Patient p WHERE p.username = :username")
-    , @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password")})
+    , @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password")
+    , @NamedQuery(name = "Patient.findByParentName", query = "SELECT p FROM Patient p WHERE p.parentName = :parentName")})
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,12 +78,9 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
-    private Collection<Appointment> appointmentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
-    private Collection<Report> reportCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
-    private Collection<Request> requestCollection;
+    @Basic(optional = false)
+    @Column(name = "ParentName")
+    private String parentName;
     @JoinColumn(name = "LoginId", referencedColumnName = "LoginID")
     @ManyToOne
     private Login loginId;
@@ -98,7 +92,7 @@ public class Patient implements Serializable {
         this.patientID = patientID;
     }
 
-    public Patient(Integer patientID, String firstName, String lastName, String phoneNumber, String sex, String address, String email, String username, String password) {
+    public Patient(Integer patientID, String firstName, String lastName, String phoneNumber, String sex, String address, String email, String username, String password, String parentName) {
         this.patientID = patientID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -108,6 +102,7 @@ public class Patient implements Serializable {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.parentName = parentName;
     }
 
     public Integer getPatientID() {
@@ -190,31 +185,12 @@ public class Patient implements Serializable {
         this.password = password;
     }
 
-    @XmlTransient
-    public Collection<Appointment> getAppointmentCollection() {
-        return appointmentCollection;
+    public String getParentName() {
+        return parentName;
     }
 
-    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
-        this.appointmentCollection = appointmentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Report> getReportCollection() {
-        return reportCollection;
-    }
-
-    public void setReportCollection(Collection<Report> reportCollection) {
-        this.reportCollection = reportCollection;
-    }
-
-    @XmlTransient
-    public Collection<Request> getRequestCollection() {
-        return requestCollection;
-    }
-
-    public void setRequestCollection(Collection<Request> requestCollection) {
-        this.requestCollection = requestCollection;
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 
     public Login getLoginId() {

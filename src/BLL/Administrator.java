@@ -68,12 +68,14 @@ public class Administrator implements Serializable {
     @Basic(optional = false)
     @Column(name = "Sex")
     private String sex;
+    @Basic(optional = false)
     @Column(name = "Username")
     private String username;
+    @Basic(optional = false)
     @Column(name = "Password")
     private String password;
     @JoinColumn(name = "Login_ID", referencedColumnName = "LoginID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Login loginID;
 
     public Administrator() {
@@ -83,7 +85,7 @@ public class Administrator implements Serializable {
         this.administratorID = administratorID;
     }
 
-    public Administrator(Integer administratorID, String firstName, String lastName, Date dateOfbirth, String phoneNumber, String email, String sex) {
+    public Administrator(Integer administratorID, String firstName, String lastName, Date dateOfbirth, String phoneNumber, String email, String sex, String username, String password) {
         this.administratorID = administratorID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,6 +93,8 @@ public class Administrator implements Serializable {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.sex = sex;
+        this.username = username;
+        this.password = password;
     }
 
     public Integer getAdministratorID() {
@@ -195,7 +199,7 @@ public class Administrator implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return "BLL.Administrator[ administratorID=" + administratorID + " ]";
     }
-
+    
 }

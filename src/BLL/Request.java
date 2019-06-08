@@ -31,11 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Request.findAll", query = "SELECT r FROM Request r")
-    , @NamedQuery(name = "Request.findById", query = "SELECT r FROM Request r WHERE r.id = :id")})
+    , @NamedQuery(name = "Request.findById", query = "SELECT r FROM Request r WHERE r.id = :id")
+    , @NamedQuery(name = "Request.findByStatus", query = "SELECT r FROM Request r WHERE r.status = :status")})
 public class Request implements Serializable {
-
-    @Column(name = "Status")
-    private String status;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,6 +42,8 @@ public class Request implements Serializable {
     @GeneratedValue(generator = "InvSeq")
     @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer id;
+    @Column(name = "Status")
+    private String status;
     @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
     @ManyToOne(optional = false)
     private Doctor doctorID;
@@ -64,6 +64,14 @@ public class Request implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Doctor getDoctorID() {
@@ -89,7 +97,8 @@ public class Request implements Serializable {
         return hash;
     }
 
-    public static boolean exists(Request r) throws HealthException {
+    
+public static boolean exists(Request r) throws HealthException {
         RequestRepository rr = new RequestRepository();
         List<Request> all = rr.findAll();
         for (Request request : all) {
@@ -99,7 +108,7 @@ public class Request implements Serializable {
         }
         return false;
     }
-
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -117,13 +126,5 @@ public class Request implements Serializable {
     public String toString() {
         return "BLL.Request[ id=" + id + " ]";
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
+    
 }

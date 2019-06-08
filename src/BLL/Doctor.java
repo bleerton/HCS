@@ -6,8 +6,10 @@
 package BLL;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -80,6 +84,14 @@ public class Doctor implements Serializable {
     private String username;
     @Column(name = "Password")
     private String password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
+    private Collection<Appointment> appointmentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
+    private Collection<Report> reportCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
+    private Collection<Connection> connectionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorID")
+    private Collection<Request> requestCollection;
     @JoinColumn(name = "Login_ID", referencedColumnName = "LoginID")
     @ManyToOne
     private Login loginID;
@@ -189,6 +201,42 @@ public class Doctor implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @XmlTransient
+    public Collection<Appointment> getAppointmentCollection() {
+        return appointmentCollection;
+    }
+
+    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
+        this.appointmentCollection = appointmentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Report> getReportCollection() {
+        return reportCollection;
+    }
+
+    public void setReportCollection(Collection<Report> reportCollection) {
+        this.reportCollection = reportCollection;
+    }
+
+    @XmlTransient
+    public Collection<Connection> getConnectionCollection() {
+        return connectionCollection;
+    }
+
+    public void setConnectionCollection(Collection<Connection> connectionCollection) {
+        this.connectionCollection = connectionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Request> getRequestCollection() {
+        return requestCollection;
+    }
+
+    public void setRequestCollection(Collection<Request> requestCollection) {
+        this.requestCollection = requestCollection;
     }
 
     public Login getLoginID() {

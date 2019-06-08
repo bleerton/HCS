@@ -11,6 +11,7 @@
     <class>BLL.Sysdiagrams</class>
     <class>BLL.RequestedAppointments</class>
     <class>BLL.Request</class>
+    <class>BLL.Connection</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=HealthCareScheduling"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

@@ -17,21 +17,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Enis
  */
 public class LoginWindow extends javax.swing.JFrame {
+
     private int roli;
-    
-    public void setRoli(int roli){
+
+    public void setRoli(int roli) {
         this.roli = roli;
     }
-    
-    public int getRoli(){
+
+    public int getRoli() {
         return roli;
     }
+
     /**
      * Creates new form LoginWindow
      */
@@ -40,8 +41,8 @@ public class LoginWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
-    
-    public JLabel getRegisterLabel(){
+
+    public JLabel getRegisterLabel() {
         return registerLabel;
     }
 
@@ -303,35 +304,39 @@ public class LoginWindow extends javax.swing.JFrame {
             String password = new String(passwordField.getPassword());
             LoginRepository lr = new LoginRepository();
             Login l = lr.loginByUsernamePassowrd(username, password);
-            if (l.getRoli()==2 && this.roli == 2) {
+            if (l.getRoli() == 2 && this.roli == 2) {
                 this.dispose();
+                new ConfirmNotification().setVisible(true);
                 DoctorWindow dw = new DoctorWindow();
                 dw.setLocationRelativeTo(null);
-                dw.changeProfileLabel(findDoctorName(username).getFirstName()+" "+findDoctorName(username).getLastName());
+                dw.changeProfileLabel(findDoctorName(username).getFirstName() + " " + findDoctorName(username).getLastName());
                 dw.setDoctorIDProfile(findDoctorName(username).getDoctorID());
-            }else if(l.getRoli()==1 && this.roli == 1){
-                this.setVisible(false);
-                new AdminWindow().setVisible(true);
-            }else if (l.getRoli() == 3 && this.roli == 3) {
+            } else if (l.getRoli() == 1 && this.roli == 1) {
                 this.dispose();
+                new ConfirmNotification().setVisible(true);
+                new AdminWindow().setVisible(true);
+            } else if (l.getRoli() == 3 && this.roli == 3) {
+                this.dispose();
+                new ConfirmNotification().setVisible(true);
                 PatientWindow pw = new PatientWindow();
                 pw.setLocationRelativeTo(null);
-                pw.changeProfileLabel(findPatientName(username).getFirstName()+" "+findPatientName(username).getLastName());
+                pw.changeProfileLabel(findPatientName(username).getFirstName() + " " + findPatientName(username).getLastName());
                 pw.setPatientIDProfile(findPatientName(username).getPatientID());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "This Account doesnt match the window");
             }
 
         } catch (HealthException ex) {
-            JOptionPane.showMessageDialog(this, "Gabim!");
+//            JOptionPane.showMessageDialog(this, "Gabim!");
+            new WrongNotification().setVisible(true);
+
         }
 
-        
-        
+
     }//GEN-LAST:event_loginButtonMouseClicked
-    
+
     ///Metod per pacientin me qit te profile label emrin 
-    public Patient findPatientName(String username) throws HealthException{
+    public Patient findPatientName(String username) throws HealthException {
 //        String username = usernameTextField.getText();
 //        String password = new String(passwordField.getPassword());
         PatientRepository pr = new PatientRepository();
@@ -343,8 +348,8 @@ public class LoginWindow extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    public Doctor findDoctorName(String username) throws HealthException{
+
+    public Doctor findDoctorName(String username) throws HealthException {
 //        String username = usernameTextField.getText();
 //        String password = new String(passwordField.getPassword());
         DoctorRepository dr = new DoctorRepository();
@@ -356,7 +361,7 @@ public class LoginWindow extends javax.swing.JFrame {
         }
         return null;
     }
-    
+
     private void minusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minusButtonMouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_minusButtonMouseClicked
@@ -367,18 +372,17 @@ public class LoginWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_passwordFieldFocusGained
 
-    
     //Metod e kthimit te passwordit ne text edhe pse munesh me Instanc t Stringut 
-    public String turnPasswordToText(){
+    public String turnPasswordToText() {
         char[] chars = passwordField.getPassword();
         String a = "";
         for (int i = 0; i < chars.length; i++) {
             a += chars[i];
         }
-        
+
         return a;
     }
-    
+
     private void passwordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
         if (String.valueOf(turnPasswordToText()).equals("")) {
             passwordField.setText("whatever");

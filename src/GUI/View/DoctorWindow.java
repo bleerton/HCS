@@ -3,10 +3,11 @@ package GUI.View;
 import BLL.Doctor;
 import DAL.DoctorRepository;
 import DAL.HealthException;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 
@@ -58,8 +59,8 @@ public class DoctorWindow extends javax.swing.JFrame {
 
     public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
-        for (int i = 0; i < allFrames.length; i++) {
-            desktopPane.remove(allFrames[i]);
+        for (JInternalFrame allFrame : allFrames) {
+            desktopPane.remove(allFrame);
         }
     }
 
@@ -119,7 +120,7 @@ public class DoctorWindow extends javax.swing.JFrame {
         menuButton.setBackground(new java.awt.Color(255, 255, 255));
         menuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         menuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MenuButton.png"))); // NOI18N
-        menuButton.setText("Menu");
+        menuButton.setText("      Today");
         menuButton.setBorder(null);
         menuButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         menuButton.setPreferredSize(new java.awt.Dimension(47, 15));
@@ -158,6 +159,11 @@ public class DoctorWindow extends javax.swing.JFrame {
         newReportButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newReportButtonMouseClicked(evt);
+            }
+        });
+        newReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newReportButtonActionPerformed(evt);
             }
         });
 
@@ -401,7 +407,12 @@ public class DoctorWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
-        // TODO add your handling code here:
+        TodayFrame t = new TodayFrame();
+        terminateFrames();
+        t.setDoctorIDTable(this.doctor_ID_Profile);
+        desktopPane.add(t);
+        t.loadTable();
+        t.show();
     }//GEN-LAST:event_menuButtonActionPerformed
 
     private void requestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonActionPerformed
@@ -432,8 +443,15 @@ public class DoctorWindow extends javax.swing.JFrame {
 
     private void newReportButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newReportButtonMouseClicked
         ReportForm d = new ReportForm();
+        d.setDoctorIDTable(this.doctor_ID_Profile);
         terminateFrames();
         desktopPane.add(d);
+        d.loadComboBox();
+        try {
+            d.loadLabels();
+        } catch (HealthException ex) {
+            Logger.getLogger(DoctorWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         d.show();
     }//GEN-LAST:event_newReportButtonMouseClicked
 
@@ -442,8 +460,17 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsLabelMouseDragged
 
     private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
-
+            MyPatientsFrame a = new MyPatientsFrame();
+            terminateFrames();
+            a.setDoctorIDTable(this.doctor_ID_Profile);
+            desktopPane.add(a);
+            a.show();
+            a.loadTable();
     }//GEN-LAST:event_myPatientsActionPerformed
+
+    private void newReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newReportButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newReportButtonActionPerformed
 
     /**
      * @param args the command line arguments

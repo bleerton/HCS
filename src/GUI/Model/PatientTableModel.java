@@ -66,7 +66,9 @@ public class PatientTableModel extends AbstractTableModel{
             case 4:
                 return a.getSex();
             case 5:
-                return a.getEmail();
+                return a.getPhoneNumber();
+            case 6:
+                return a.getAddress();
             default:
                 return null;
         }

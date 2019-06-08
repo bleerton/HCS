@@ -71,6 +71,8 @@ public class RegisterWindow extends javax.swing.JFrame {
         passwordText = new javax.swing.JPasswordField();
         repeatedPasswordText = new javax.swing.JPasswordField();
         dateChooser = new datechooser.beans.DateChooserCombo();
+        parentNameText = new javax.swing.JTextField();
+        firstNameLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -242,6 +244,16 @@ public class RegisterWindow extends javax.swing.JFrame {
 
         repeatedPasswordText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        parentNameText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        parentNameText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parentNameTextActionPerformed(evt);
+            }
+        });
+
+        firstNameLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        firstNameLabel1.setText("Parent Name:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -249,11 +261,6 @@ public class RegisterWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 31, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
@@ -270,11 +277,10 @@ public class RegisterWindow extends javax.swing.JFrame {
                                         .addGap(20, 20, 20)
                                         .addComponent(maleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(femaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(femaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -303,7 +309,18 @@ public class RegisterWindow extends javax.swing.JFrame {
                                 .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(emailText)))
-                        .addGap(31, 31, 31))))
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(firstNameLabel1)
+                                .addGap(11, 11, 11)
+                                .addComponent(parentNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,6 +329,10 @@ public class RegisterWindow extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameLabel)
                     .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(parentNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstNameLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lastNameLabel)
@@ -418,7 +439,7 @@ public class RegisterWindow extends javax.swing.JFrame {
     // me nda kodin masi pom vyn 2 her qikjop metod 
     public boolean annyIsEmpty(){
          if (usernameText.getText().trim().isEmpty() || firstNameText.getText().trim().isEmpty() || lastNameText.getText().trim().isEmpty() || passwordText.getPassword().equals("") || emailText.getText().trim().isEmpty()
-                || repeatedPasswordText.getPassword().equals("") || addressText.getText().trim().isEmpty() || phoneNumberText.getText().trim().isEmpty()){
+                || repeatedPasswordText.getPassword().equals("") || addressText.getText().trim().isEmpty() || phoneNumberText.getText().trim().isEmpty() || parentNameText.getText().trim().isEmpty()){
              return true;
          }
          return false;
@@ -454,12 +475,11 @@ public class RegisterWindow extends javax.swing.JFrame {
         patient.setLastName(lastNameText.getText());
         patient.setPassword(new String(passwordText.getPassword()));
         patient.setDateOfBirth(dateChooser.getCurrent().getTime());
-        System.out.println(dateChooser.getDateFormat());
         patient.setPhoneNumber(phoneNumberText.getText());
         patient.setEmail(emailText.getText());
         patient.setAddress(addressText.getText());
         patient.setSex(gender);
-        
+        patient.setParentName(parentNameText.getText());
         
         try{
             login.setUsername(usernameText.getText());
@@ -551,6 +571,10 @@ public class RegisterWindow extends javax.swing.JFrame {
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_minusButtonActionPerformed
 
+    private void parentNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentNameTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_parentNameTextActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -596,6 +620,7 @@ public class RegisterWindow extends javax.swing.JFrame {
     private javax.swing.JTextField emailText;
     private javax.swing.JRadioButton femaleButton;
     private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JLabel firstNameLabel1;
     private javax.swing.JTextField firstNameText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -604,6 +629,7 @@ public class RegisterWindow extends javax.swing.JFrame {
     private javax.swing.JLabel loginFormLabel;
     private javax.swing.JRadioButton maleButton;
     private javax.swing.JButton minusButton;
+    private javax.swing.JTextField parentNameText;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JLabel phoneNumberLabel;

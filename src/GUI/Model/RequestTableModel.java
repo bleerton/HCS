@@ -6,8 +6,10 @@
 package GUI.Model;
 
 import BLL.Request;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -46,11 +48,16 @@ public class RequestTableModel extends AbstractTableModel {
     }
     
     public String getTime(){
-        java.util.Date dt = new java.util.Date();
-                java.text.SimpleDateFormat sdf = 
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String currentTime = sdf.format(dt);
-                return currentTime;
+//        java.util.Date dt = new java.util.Date();
+//                java.text.SimpleDateFormat sdf = 
+//                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                return sdf.format(dt);
+
+    DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Calendar calendar = Calendar.getInstance();
+    String s = dateformat.format(calendar.getTime());
+    return s;
+    
     }
     public Request getRequest(int index){
         return list.get(index);
