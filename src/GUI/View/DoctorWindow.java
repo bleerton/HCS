@@ -27,7 +27,7 @@ public class DoctorWindow extends javax.swing.JFrame {
             nameLabel.setText(firstname + " ");
         }
     }
-
+    // permes qetij atributi dihet kush osht logged in per momentin, per me pa ku inicializohet shko te loggini edhe e sheh sa her t inicializohet doctorwindow e ka metoden aty setDrID.
     private int doctor_ID_Profile;
 
     public void setDoctorIDProfile(int doctorID) {
@@ -56,7 +56,7 @@ public class DoctorWindow extends javax.swing.JFrame {
         }
         return null;
     }
-
+    //mos me lon me shume se nje jinternalframe n screen
     public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
         for (JInternalFrame allFrame : allFrames) {
@@ -431,7 +431,7 @@ public class DoctorWindow extends javax.swing.JFrame {
 
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
         TodayFrame t = new TodayFrame();
-        terminateFrames();
+        terminateFrames();                                                                           ///Renditjen sbon me prish 
         t.setDoctorIDTable(this.doctor_ID_Profile);
         desktopPane.add(t);
         t.loadTable();
@@ -441,7 +441,7 @@ public class DoctorWindow extends javax.swing.JFrame {
     private void requestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonActionPerformed
         DoctorAppointments d = new DoctorAppointments();
         terminateFrames();
-        d.setDoctorIDTable(this.doctor_ID_Profile);
+        d.setDoctorIDTable(this.doctor_ID_Profile);                                                                           ///Renditjen sbon me prish 
         desktopPane.add(d);
         d.loadTable();
         d.show();
@@ -449,7 +449,7 @@ public class DoctorWindow extends javax.swing.JFrame {
 
     private void documentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentButtonActionPerformed
         SchedulerFrame d = new SchedulerFrame();
-        terminateFrames();
+        terminateFrames();                                                                           ///Renditjen sbon me prish 
         desktopPane.add(d);
         d.show();
     }//GEN-LAST:event_documentButtonActionPerformed
@@ -465,12 +465,12 @@ public class DoctorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_profilePanelMouseExited
 
     private void newReportButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newReportButtonMouseClicked
-        ReportForm d = new ReportForm();
+        DoctorReportForm d = new DoctorReportForm();
         d.setDoctorIDTable(this.doctor_ID_Profile);
         terminateFrames();
         desktopPane.add(d);
         d.loadComboBox();
-        try {
+        try {                                                                           ///Renditjen sbon me prish 
             d.loadLabels();
         } catch (HealthException ex) {
             return;
@@ -485,7 +485,7 @@ public class DoctorWindow extends javax.swing.JFrame {
     private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
             MyPatientsFrame a = new MyPatientsFrame();
             terminateFrames();
-            a.setDoctorIDTable(this.doctor_ID_Profile);
+            a.setDoctorIDTable(this.doctor_ID_Profile);                                                                           ///Renditjen sbon me prish 
             desktopPane.add(a);
             a.show();
             a.loadTable();

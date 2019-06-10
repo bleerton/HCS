@@ -29,9 +29,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
     RequestTableModel rtm = new RequestTableModel();
     RequestRepository rr = new RequestRepository();
     AppointmentRepository ar = new AppointmentRepository();
-    /**
-     * Creates new form DoctorAppointmentsTableList
-     */
+    
     private int doctorID_Table;
 
     public void setDoctorIDTable(int ptd) {
@@ -244,6 +242,8 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
 //        }
 //        return date1;
 //    }
+    
+    //me kqyr nese naj textField ose najsen qe duhet mu shkru nga useri a osht e zbrazet
     public boolean anyIsEmpty() {
         if (dateChooser == null) {
             JOptionPane.showMessageDialog(this, "Date chooser is empty !");
@@ -334,7 +334,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
             } else {
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Nuk keni selektuar asgje per te fshire!");
+            JOptionPane.showMessageDialog(this, "You didnt select anything to delete!");
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
 

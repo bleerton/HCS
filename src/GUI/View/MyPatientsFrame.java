@@ -47,9 +47,7 @@ public class MyPatientsFrame extends javax.swing.JInternalFrame {
      */
     public void loadTable() {
         try {
-//            List<Patient> list = pr.findAll();
             ArrayList<Patient> listByID = new ArrayList<>();
-
             for (Connection connection : cr.findAll()) {
                 if (connection.getDoctorID().getDoctorID() == doctorID_Table) {
                     listByID.add(connection.getPatientID());

@@ -5,11 +5,7 @@
  */
 package GUI.View;
 
-import BLL.Connection;
-import BLL.Doctor;
-import BLL.Patient;
 import BLL.Report;
-import DAL.DoctorRepository;
 import DAL.HealthException;
 import DAL.ReportRepository;
 import GUI.Model.ChooseReportComboBox;

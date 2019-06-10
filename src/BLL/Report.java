@@ -10,6 +10,7 @@ import DAL.ReportRepository;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bleer
+ * @author Enis
  */
 @Entity
 @Table(name = "Report")
@@ -35,7 +36,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Report.findAll", query = "SELECT r FROM Report r")
     , @NamedQuery(name = "Report.findByReportID", query = "SELECT r FROM Report r WHERE r.reportID = :reportID")
-    , @NamedQuery(name = "Report.findByDate", query = "SELECT r FROM Report r WHERE r.date = :date")})
+    , @NamedQuery(name = "Report.findByDate", query = "SELECT r FROM Report r WHERE r.date = :date")
+    , @NamedQuery(name = "Report.findByCode", query = "SELECT r FROM Report r WHERE r.code = :code")
+    , @NamedQuery(name = "Report.findByCity", query = "SELECT r FROM Report r WHERE r.city = :city")
+    , @NamedQuery(name = "Report.findByInstitution", query = "SELECT r FROM Report r WHERE r.institution = :institution")
+    , @NamedQuery(name = "Report.findByDiagnose", query = "SELECT r FROM Report r WHERE r.diagnose = :diagnose")})
 public class Report implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,12 +54,6 @@ public class Report implements Serializable {
     @Column(name = "Date")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
-    @ManyToOne(optional = false)
-    private Doctor doctorID;
-    @JoinColumn(name = "PatientID", referencedColumnName = "PatientID")
-    @ManyToOne(optional = false)
-    private Patient patientID;
     @Basic(optional = false)
     @Column(name = "Code")
     private int code;
@@ -67,7 +66,12 @@ public class Report implements Serializable {
     @Basic(optional = false)
     @Column(name = "Diagnose")
     private String diagnose;
-
+    @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
+    @ManyToOne(optional = false)
+    private Doctor doctorID;
+    @JoinColumn(name = "PatientID", referencedColumnName = "PatientID")
+    @ManyToOne(optional = false)
+    private Patient patientID;
 
     public Report() {
     }
@@ -76,9 +80,13 @@ public class Report implements Serializable {
         this.reportID = reportID;
     }
 
-    public Report(Integer reportID, Date date) {
+    public Report(Integer reportID, Date date, int code, String city, String institution, String diagnose) {
         this.reportID = reportID;
         this.date = date;
+        this.code = code;
+        this.city = city;
+        this.institution = institution;
+        this.diagnose = diagnose;
     }
 
     public Integer getReportID() {
@@ -96,57 +104,6 @@ public class Report implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public Doctor getDoctorID() {
-        return doctorID;
-    }
-
-    public void setDoctorID(Doctor doctorID) {
-        this.doctorID = doctorID;
-    }
-
-    public Patient getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(Patient patientID) {
-        this.patientID = patientID;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (reportID != null ? reportID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Report)) {
-            return false;
-        }
-        Report other = (Report) object;
-        if ((this.reportID == null && other.reportID != null) || (this.reportID != null && !this.reportID.equals(other.reportID))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "BLL.Report[ reportID=" + reportID + " ]";
-    }
-//    public static boolean exist(Report a) throws HealthException{
-//        ReportRepository ar = new ReportRepository();
-//        List<Report> all = ar.findAll();
-//        for (Report report : all) {
-//            if (report.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && report.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     public int getCode() {
         return code;
@@ -179,4 +136,57 @@ public class Report implements Serializable {
     public void setDiagnose(String diagnose) {
         this.diagnose = diagnose;
     }
+
+    public Doctor getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(Doctor doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public Patient getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(Patient patientID) {
+        this.patientID = patientID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (reportID != null ? reportID.hashCode() : 0);
+        return hash;
+    }
+
+    public static boolean exists(Report r) throws HealthException {
+        ReportRepository rr = new ReportRepository();
+        List<Report> all = rr.findAll();
+        for (Report report : all) {
+            if (Objects.equals(report.doctorID.getDoctorID(), r.doctorID.getDoctorID()) && Objects.equals(report.patientID.getPatientID(), r.patientID.getPatientID())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Report)) {
+            return false;
+        }
+        Report other = (Report) object;
+        if ((this.reportID == null && other.reportID != null) || (this.reportID != null && !this.reportID.equals(other.reportID))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return reportID+" - "+getDoctorID().getFirstName();
+    }
+    
 }

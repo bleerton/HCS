@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bleer
+ * @author Enis
  */
 @Entity
 @Table(name = "Appointment")
@@ -91,6 +91,17 @@ public class Appointment implements Serializable {
 
     public Integer getAppointmentID() {
         return appointmentID;
+    }
+    
+    public static boolean exist(Appointment a) throws HealthException{
+        AppointmentRepository ar = new AppointmentRepository();
+        List<Appointment> all = ar.findAll();
+        for (Appointment appointment : all) {
+            if (appointment.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && appointment.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setAppointmentID(Integer appointmentID) {
@@ -185,16 +196,5 @@ public class Appointment implements Serializable {
     public String toString() {
         return "BLL.Appointment[ appointmentID=" + appointmentID + " ]";
     }
-
-    public static boolean exist(Appointment a) throws HealthException {
-        AppointmentRepository ar = new AppointmentRepository();
-        List<Appointment> all = ar.findAll();
-        for (Appointment appointment : all) {
-            if (appointment.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && appointment.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
 }

@@ -308,8 +308,8 @@ public class LoginWindow extends javax.swing.JFrame {
                 this.dispose();
                 new ConfirmNotification().setVisible(true);
                 DoctorWindow dw = new DoctorWindow();
-                dw.setLocationRelativeTo(null);
-                dw.changeProfileLabel(findDoctorName(username).getFirstName() + " " + findDoctorName(username).getLastName());
+                dw.setLocationRelativeTo(null);         
+                dw.changeProfileLabel(findDoctorName(username).getFirstName() + " " + findDoctorName(username).getLastName());          ///Te 3 jat qishtu e gjejm ID permes username
                 dw.setDoctorIDProfile(findDoctorName(username).getDoctorID());
             } else if (l.getRoli() == 1 && this.roli == 1) {
                 this.dispose();
@@ -349,6 +349,7 @@ public class LoginWindow extends javax.swing.JFrame {
         return null;
     }
 
+    ///Metod per doktorrin me qit te profile label emrin 
     public Doctor findDoctorName(String username) throws HealthException {
 //        String username = usernameTextField.getText();
 //        String password = new String(passwordField.getPassword());

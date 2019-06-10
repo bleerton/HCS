@@ -18,18 +18,21 @@ import javax.swing.table.AbstractTableModel;
  * @author Enis
  */
 public class RequestTableModel extends AbstractTableModel {
+
     List<Request> list;
-    String [] cols={"Requester Name","Assigned Too","DueBy","Status"};
-    
-    
-    public RequestTableModel(){}
-    
-    public RequestTableModel(List<Request> list){
-        this.list=list;
+    String[] cols = {"Requester Name", "Assigned Too", "DueBy", "Status"};
+
+    public RequestTableModel() {
     }
-    public void addList(List<Request> list){
-        this.list=list;
+
+    public RequestTableModel(List<Request> list) {
+        this.list = list;
     }
+
+    public void addList(List<Request> list) {
+        this.list = list;
+    }
+
     @Override
     public int getRowCount() {
         return list.size();
@@ -39,34 +42,37 @@ public class RequestTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return cols.length;
     }
+
     @Override
-    public String getColumnName(int col){
+    public String getColumnName(int col) {
         return cols[col];
     }
-    public void remove(int row){
+
+    public void remove(int row) {
         list.remove(row);
     }
-    
-    public String getTime(){
+
+    //metode qe e kthen kohen edhe daten e tanishme 
+    public String getTime() {
 //        java.util.Date dt = new java.util.Date();
 //                java.text.SimpleDateFormat sdf = 
 //                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                return sdf.format(dt);
 
-    DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    Calendar calendar = Calendar.getInstance();
-    String s = dateformat.format(calendar.getTime());
-    return s;
-    
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        return dateformat.format(calendar.getTime());
     }
-    public Request getRequest(int index){
+
+    public Request getRequest(int index) {
         return list.get(index);
     }
+
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Request a = list.get(rowIndex);
-        
-        switch(columnIndex){
+
+        switch (columnIndex) {
             case 0:
                 return a.getPatientID().toString();
             case 1:

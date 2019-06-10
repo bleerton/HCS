@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bleer
+ * @author Enis
  */
 @Entity
 @Table(name = "Doctor")
@@ -269,7 +269,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return firstName+" "+lastName;
     }
-
+    
 }

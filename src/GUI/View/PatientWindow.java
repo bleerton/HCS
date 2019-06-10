@@ -31,8 +31,8 @@ public class PatientWindow extends javax.swing.JFrame {
     }
     //Atribut qe me rujt ID e profilit qe osht LOGGED-IN per momentin
     private int patient_ID_Profile;
-    
-    public void setPatientIDProfile(int patientID){
+
+    public void setPatientIDProfile(int patientID) {
         this.patient_ID_Profile = patientID;
     }
 
@@ -151,7 +151,7 @@ public class PatientWindow extends javax.swing.JFrame {
         myPatients.setBackground(new java.awt.Color(255, 255, 255));
         myPatients.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         myPatients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MyPattientsButton.png"))); // NOI18N
-        myPatients.setText("      My Reports");
+        myPatients.setText("         My Reports");
         myPatients.setBorder(null);
         myPatients.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         myPatients.setPreferredSize(new java.awt.Dimension(47, 15));
@@ -405,16 +405,16 @@ public class PatientWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_menuButtonActionPerformed
 
     private void favouriteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favouriteButtonActionPerformed
-           
+
     }//GEN-LAST:event_favouriteButtonActionPerformed
 
-    public void terminateFrames(){
+    public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
         for (int i = 0; i < allFrames.length; i++) {
-                desktopPane.remove(allFrames[i]);
+            desktopPane.remove(allFrames[i]);
         }
     }
-    
+
     private void appointmentsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsButtonMouseClicked
         PatientAppointments app = new PatientAppointments();
         this.terminateFrames();
@@ -432,21 +432,21 @@ public class PatientWindow extends javax.swing.JFrame {
         app.show();
     }//GEN-LAST:event_appointmentsButtonMouseClicked
 
-    public Patient findPatientByID(int id) throws HealthException{
+    public Patient findPatientByID(int id) throws HealthException {
         PatientRepository pr = new PatientRepository();
         List<Patient> list = pr.findAll();
         for (int i = 0; i < list.size(); i++) {
-           
+
             if (list.get(i).getPatientID() == id) {
                 return list.get(i);
             }
         }
         return null;
     }
-    
-    
+
+
     private void documentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentButtonActionPerformed
-            new NotificationFrame().setVisible(true);
+        new NotificationFrame().setVisible(true);
     }//GEN-LAST:event_documentButtonActionPerformed
 
     private void nameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseEntered
@@ -463,7 +463,18 @@ public class PatientWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
-        // TODO add your handling code here:
+        PatientReportForm t = new PatientReportForm();
+        t.setPatientIDTable(this.patient_ID_Profile);
+        terminateFrames();                                                                           ///Renditjen sbon me prish 
+        desktopPane.add(t);
+        t.loadComboBox();
+        try {                                                                           ///Renditjen sbon me prish 
+            t.loadLabels();
+        } catch (HealthException ex) {
+            return;
+        }
+        
+        t.show();
     }//GEN-LAST:event_myPatientsActionPerformed
 
     /**
