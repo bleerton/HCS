@@ -298,7 +298,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ButtonsFolder/ButtonBackground/MyPattientsButton.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="         My Patients"/>
+            <Property name="text" type="java.lang.String" value="      My Reports"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -313,6 +313,9 @@
               <Image iconType="3" name="/ButtonsFolder/Clicked/MyPatientsClicked.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myPatientsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="documentButton">
           <Properties>

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Connection")
@@ -78,17 +78,6 @@ public class Connection implements Serializable {
     public void setPatientID(Patient patientID) {
         this.patientID = patientID;
     }
-    
-    public static boolean exist(Connection a) throws HealthException{
-        ConnectionRepository ar = new ConnectionRepository();
-        List<Connection> all = ar.findAll();
-        for (Connection connection : all) {
-            if (connection.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && connection.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public int hashCode() {
@@ -114,5 +103,15 @@ public class Connection implements Serializable {
     public String toString() {
         return "BLL.Connection[ id=" + id + " ]";
     }
-    
+
+    public static boolean exist(Connection a) throws HealthException {
+        ConnectionRepository ar = new ConnectionRepository();
+        List<Connection> all = ar.findAll();
+        for (Connection connection : all) {
+            if (connection.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && connection.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

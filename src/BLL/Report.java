@@ -5,8 +5,11 @@
  */
 package BLL;
 
+import DAL.HealthException;
+import DAL.ReportRepository;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Report")
@@ -52,6 +55,19 @@ public class Report implements Serializable {
     @JoinColumn(name = "PatientID", referencedColumnName = "PatientID")
     @ManyToOne(optional = false)
     private Patient patientID;
+    @Basic(optional = false)
+    @Column(name = "Code")
+    private int code;
+    @Basic(optional = false)
+    @Column(name = "City")
+    private String city;
+    @Basic(optional = false)
+    @Column(name = "Institution")
+    private String institution;
+    @Basic(optional = false)
+    @Column(name = "Diagnose")
+    private String diagnose;
+
 
     public Report() {
     }
@@ -121,5 +137,46 @@ public class Report implements Serializable {
     public String toString() {
         return "BLL.Report[ reportID=" + reportID + " ]";
     }
-    
+//    public static boolean exist(Report a) throws HealthException{
+//        ReportRepository ar = new ReportRepository();
+//        List<Report> all = ar.findAll();
+//        for (Report report : all) {
+//            if (report.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && report.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
+
+    public String getDiagnose() {
+        return diagnose;
+    }
+
+    public void setDiagnose(String diagnose) {
+        this.diagnose = diagnose;
+    }
 }

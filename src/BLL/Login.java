@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Login")
@@ -156,5 +156,5 @@ public class Login implements Serializable {
     public String toString() {
         return "BLL.Login[ loginID=" + loginID + " ]";
     }
-    
+
 }

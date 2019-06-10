@@ -151,12 +151,17 @@ public class PatientWindow extends javax.swing.JFrame {
         myPatients.setBackground(new java.awt.Color(255, 255, 255));
         myPatients.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         myPatients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MyPattientsButton.png"))); // NOI18N
-        myPatients.setText("         My Patients");
+        myPatients.setText("      My Reports");
         myPatients.setBorder(null);
         myPatients.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         myPatients.setPreferredSize(new java.awt.Dimension(47, 15));
         myPatients.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/MyPatientsHover.png"))); // NOI18N
         myPatients.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/MyPatientsClicked.png"))); // NOI18N
+        myPatients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myPatientsActionPerformed(evt);
+            }
+        });
 
         documentButton.setBackground(new java.awt.Color(255, 255, 255));
         documentButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -456,6 +461,10 @@ public class PatientWindow extends javax.swing.JFrame {
         this.dispose();
         new StartingPage().setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void myPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPatientsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myPatientsActionPerformed
 
     /**
      * @param args the command line arguments

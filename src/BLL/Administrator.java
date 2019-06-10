@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Administrator")
@@ -46,9 +46,9 @@ public class Administrator implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "AdministratorID")
+    private Integer administratorID;
     @GeneratedValue(generator = "InvSeq")
     @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
-    private Integer administratorID;
     @Basic(optional = false)
     @Column(name = "First_Name")
     private String firstName;
@@ -199,7 +199,6 @@ public class Administrator implements Serializable {
 
     @Override
     public String toString() {
-        return "BLL.Administrator[ administratorID=" + administratorID + " ]";
+        return firstName + " " + lastName ;
     }
-    
 }

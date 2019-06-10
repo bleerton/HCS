@@ -6,8 +6,10 @@
 package BLL;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,15 +18,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Patient")
@@ -81,6 +85,14 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @Column(name = "ParentName")
     private String parentName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Appointment> appointmentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Report> reportCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Connection> connectionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Request> requestCollection;
     @JoinColumn(name = "LoginId", referencedColumnName = "LoginID")
     @ManyToOne
     private Login loginId;
@@ -193,6 +205,42 @@ public class Patient implements Serializable {
         this.parentName = parentName;
     }
 
+    @XmlTransient
+    public Collection<Appointment> getAppointmentCollection() {
+        return appointmentCollection;
+    }
+
+    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
+        this.appointmentCollection = appointmentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Report> getReportCollection() {
+        return reportCollection;
+    }
+
+    public void setReportCollection(Collection<Report> reportCollection) {
+        this.reportCollection = reportCollection;
+    }
+
+    @XmlTransient
+    public Collection<Connection> getConnectionCollection() {
+        return connectionCollection;
+    }
+
+    public void setConnectionCollection(Collection<Connection> connectionCollection) {
+        this.connectionCollection = connectionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Request> getRequestCollection() {
+        return requestCollection;
+    }
+
+    public void setRequestCollection(Collection<Request> requestCollection) {
+        this.requestCollection = requestCollection;
+    }
+
     public Login getLoginId() {
         return loginId;
     }
@@ -223,7 +271,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return firstName+" "+lastName;
+        return firstName + " " + lastName;
     }
-    
+
 }
