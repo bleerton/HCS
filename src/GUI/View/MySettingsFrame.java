@@ -32,7 +32,7 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
     public MySettingsFrame() {
         initComponents();
     }
-    
+
     private int roli;
     private int patientID_Table;
 
@@ -447,7 +447,7 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
             sexLabel.setText(p.getSex());
             AddressLabel.setText(p.getAddress());
             passwordLabel.setText(p.getPassword());
-            roli=3;
+            roli = 3;
         } catch (HealthException ex) {
             Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -462,7 +462,7 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
             sexLabel.setText(p.getSex());
             AddressLabel.setText(p.getAddress());
             passwordLabel.setText(p.getPassword());
-            roli=2;
+            roli = 2;
         } catch (HealthException ex) {
             Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -534,12 +534,21 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editPasswordLabel.setFont(new java.awt.Font("Times New Roman", 0, 16));
     }//GEN-LAST:event_editPasswordLabelMouseExited
 
+    public void checkForEmptySpaces() throws HealthException {
+        if (nameLabel.getText().trim().isEmpty() || emailLabel.getText().trim().isEmpty() || phoneNrLabel.getText().trim().isEmpty() || sexLabel.getText().trim().isEmpty()
+                || AddressLabel.getText().trim().isEmpty() || (new String(passwordLabel.getPassword())).trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "White Spaces not accepted !");
+            throw new HealthException("Hapesira te zbrazeta ");
+        }
+    }
+
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        if(this.roli==2){
+        if (this.roli == 2) {
             try {
-                DoctorRepository dr=new DoctorRepository();
+                checkForEmptySpaces();
+                DoctorRepository dr = new DoctorRepository();
                 Doctor p = dr.findByID(this.doctor_ID_Profile);
-                String [] name=nameLabel.getText().split(" ");
+                String[] name = nameLabel.getText().split(" ");
                 p.setFirstName(name[0]);
                 p.setLastName(name[1]);
                 p.setEmail(emailLabel.getText());
@@ -548,21 +557,29 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
                 p.setAddress(AddressLabel.getText());
                 p.setPassword(new String(passwordLabel.getPassword()));
                 dr.edit(p);
-                LoginRepository lr=new LoginRepository();
-                Login l=lr.findByID(p.getLoginID().getLoginID());
+                LoginRepository lr = new LoginRepository();
+                Login l = lr.findByID(p.getLoginID().getLoginID());
                 l.setPassword(new String(passwordLabel.getPassword()));
                 lr.edit(l);
                 this.dispose();
                 JOptionPane.showMessageDialog(this, "Changes are saved");
             } catch (HealthException ex) {
-                Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
+                
+            } catch (NullPointerException ex) {
+                
             }
-        }else if(this.roli==3){
+
+        } else if (this.roli == 3) {
             try {
-                PatientRepository dr=new PatientRepository();
+                checkForEmptySpaces();
+                PatientRepository dr = new PatientRepository();
                 Patient p = dr.findByID(this.patientID_Table);
-                String [] name=nameLabel.getText().split(" ");
+                String[] name = nameLabel.getText().split(" ");
                 p.setFirstName(name[0]);
+                if (name.length == 1) {
+                    JOptionPane.showMessageDialog(this,"U need to write an surname too!");
+                    throw new HealthException("BOI!");
+                }
                 p.setLastName(name[1]);
                 p.setEmail(emailLabel.getText());
                 p.setPhoneNumber(phoneNrLabel.getText());
@@ -570,16 +587,16 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
                 p.setAddress(AddressLabel.getText());
                 p.setPassword(new String(passwordLabel.getPassword()));
                 dr.edit(p);
-                LoginRepository lr=new LoginRepository();
-                Login l=lr.findByID(p.getLoginId().getLoginID());
+                LoginRepository lr = new LoginRepository();
+                Login l = lr.findByID(p.getLoginId().getLoginID());
                 l.setPassword(new String(passwordLabel.getPassword()));
                 lr.edit(l);
                 this.dispose();
-                JOptionPane.showMessageDialog(this, "Changes are saved");
+                JOptionPane.showMessageDialog(this, "Changes are saved,please restart the application !");
             } catch (HealthException ex) {
-                Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+       
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void editNameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editNameLabelMouseClicked

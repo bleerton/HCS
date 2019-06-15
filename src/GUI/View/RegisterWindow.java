@@ -501,10 +501,11 @@ public class RegisterWindow extends javax.swing.JFrame {
             login.setPassword(new String(passwordText.getPassword()));
             login.setRoli(3);
             lr.create(login);
+            patient.setLoginId(login);
         } catch (HealthException ex) {
             Logger.getLogger(RegisterWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        patient.setLoginId(login);
+
         try {
             pr.create(patient);
             if (!annyIsEmpty()) {
