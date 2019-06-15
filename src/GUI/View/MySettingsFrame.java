@@ -6,9 +6,11 @@
 package GUI.View;
 
 import BLL.Doctor;
+import BLL.Login;
 import BLL.Patient;
 import DAL.DoctorRepository;
 import DAL.HealthException;
+import DAL.LoginRepository;
 import DAL.PatientRepository;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,8 +18,7 @@ import java.awt.font.TextAttribute;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +32,8 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
     public MySettingsFrame() {
         initComponents();
     }
-
+    
+    private int roli;
     private int patientID_Table;
 
     public void setPatientIDTable(int ptd) {
@@ -44,7 +46,7 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
 
     private int doctor_ID_Profile;
 
-    public int getDoctorIDTable(int dtd) {
+    public int getDoctorIDProfile(int dtd) {
         return doctor_ID_Profile = dtd;
     }
 
@@ -67,17 +69,11 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        phoneNrLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        sexLabel = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        AddressLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        passwordLabel = new javax.swing.JLabel();
         editNameLabel = new javax.swing.JLabel();
         editEmailAddressLabel = new javax.swing.JLabel();
         editPhoneNrLabel = new javax.swing.JLabel();
@@ -86,6 +82,12 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editPasswordLabel = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        nameLabel = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JTextField();
+        phoneNrLabel = new javax.swing.JTextField();
+        sexLabel = new javax.swing.JTextField();
+        AddressLabel = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JPasswordField();
 
         setClosable(true);
         setFocusable(false);
@@ -127,19 +129,11 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         jLabel3.setText(" Name:");
         jLabel3.setOpaque(true);
 
-        nameLabel.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
-        nameLabel.setText("Enis Krasniqi");
-        nameLabel.setOpaque(true);
-
         jLabel1.setBackground(Color.LIGHT_GRAY);
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText(" Email Address:");
         jLabel5.setOpaque(true);
-
-        emailLabel.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
-        emailLabel.setText("eniskraasniqi@gmail.com");
-        emailLabel.setOpaque(true);
 
         jLabel1.setBackground(Color.LIGHT_GRAY);
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -147,19 +141,11 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         jLabel7.setText(" Phone Nr. :");
         jLabel7.setOpaque(true);
 
-        phoneNrLabel.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
-        phoneNrLabel.setText("+38343734831");
-        phoneNrLabel.setOpaque(true);
-
         jLabel1.setBackground(Color.LIGHT_GRAY);
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel9.setText(" Sex :");
         jLabel9.setOpaque(true);
-
-        sexLabel.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
-        sexLabel.setText("Male");
-        sexLabel.setOpaque(true);
 
         jLabel1.setBackground(Color.LIGHT_GRAY);
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -167,19 +153,11 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         jLabel11.setText(" Address :");
         jLabel11.setOpaque(true);
 
-        AddressLabel.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
-        AddressLabel.setText("Fushe Kosove");
-        AddressLabel.setOpaque(true);
-
         jLabel1.setBackground(Color.LIGHT_GRAY);
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel13.setText(" Password");
         jLabel13.setOpaque(true);
-
-        passwordLabel.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
-        passwordLabel.setText("************");
-        passwordLabel.setOpaque(true);
 
         editNameLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         editNameLabel.setForeground(new java.awt.Color(25, 42, 86));
@@ -188,6 +166,9 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editNameLabel.setText("Edit");
         editNameLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editNameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editNameLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 editNameLabelMouseEntered(evt);
             }
@@ -203,6 +184,9 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editEmailAddressLabel.setText("Edit");
         editEmailAddressLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editEmailAddressLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editEmailAddressLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 editEmailAddressLabelMouseEntered(evt);
             }
@@ -218,6 +202,9 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editPhoneNrLabel.setText("Edit");
         editPhoneNrLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editPhoneNrLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editPhoneNrLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 editPhoneNrLabelMouseEntered(evt);
             }
@@ -233,6 +220,9 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editSexLabel.setText("Edit");
         editSexLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editSexLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editSexLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 editSexLabelMouseEntered(evt);
             }
@@ -248,6 +238,9 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editAddressLabel.setText("Edit");
         editAddressLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editAddressLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editAddressLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 editAddressLabelMouseEntered(evt);
             }
@@ -263,6 +256,9 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         editPasswordLabel.setText("Edit");
         editPasswordLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editPasswordLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editPasswordLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 editPasswordLabelMouseEntered(evt);
             }
@@ -291,6 +287,23 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         cancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cancelButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/cancelButtonHover.png"))); // NOI18N
         cancelButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/cancelButtonHover.png"))); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        nameLabel.setEditable(false);
+
+        emailLabel.setEditable(false);
+
+        phoneNrLabel.setEditable(false);
+
+        sexLabel.setEditable(false);
+
+        AddressLabel.setEditable(false);
+
+        passwordLabel.setEditable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -310,27 +323,23 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(529, 529, 529))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(phoneNrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(AddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(54, 54, 54)
+                                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(phoneNrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -343,7 +352,10 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
                                     .addComponent(editPhoneNrLabel)
                                     .addComponent(editSexLabel)
                                     .addComponent(editPasswordLabel))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(529, 529, 529))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,41 +365,41 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addGap(2, 2, 2)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editNameLabel))
+                            .addComponent(editNameLabel)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editEmailAddressLabel))
+                            .addComponent(editEmailAddressLabel)
+                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
-                        .addGap(0, 0, 0)
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(phoneNrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editPhoneNrLabel))
+                            .addComponent(editPhoneNrLabel)
+                            .addComponent(phoneNrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editSexLabel))
+                    .addComponent(editSexLabel)
+                    .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editAddressLabel))
+                    .addComponent(editAddressLabel)
+                    .addComponent(AddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addGap(0, 0, 0)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editPasswordLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addComponent(editPasswordLabel)
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -434,6 +446,8 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
             phoneNrLabel.setText(p.getPhoneNumber());
             sexLabel.setText(p.getSex());
             AddressLabel.setText(p.getAddress());
+            passwordLabel.setText(p.getPassword());
+            roli=3;
         } catch (HealthException ex) {
             Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -447,6 +461,8 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
             phoneNrLabel.setText(p.getPhoneNumber());
             sexLabel.setText(p.getSex());
             AddressLabel.setText(p.getAddress());
+            passwordLabel.setText(p.getPassword());
+            roli=2;
         } catch (HealthException ex) {
             Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -519,17 +535,92 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_editPasswordLabelMouseExited
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        EntityManager em = Persistence.createEntityManagerFactory("HealthCarePU").createEntityManager();
-        Patient p = new Patient();
-        em.getTransaction().begin();
-        em.merge(p);
-        em.getTransaction().commit();
-
+        if(this.roli==2){
+            try {
+                DoctorRepository dr=new DoctorRepository();
+                Doctor p = dr.findByID(this.doctor_ID_Profile);
+                String [] name=nameLabel.getText().split(" ");
+                p.setFirstName(name[0]);
+                p.setLastName(name[1]);
+                p.setEmail(emailLabel.getText());
+                p.setPhoneNumber(phoneNrLabel.getText());
+                p.setSex(sexLabel.getText());
+                p.setAddress(AddressLabel.getText());
+                p.setPassword(new String(passwordLabel.getPassword()));
+                dr.edit(p);
+                LoginRepository lr=new LoginRepository();
+                Login l=lr.findByID(p.getLoginID().getLoginID());
+                l.setPassword(new String(passwordLabel.getPassword()));
+                lr.edit(l);
+                this.dispose();
+                JOptionPane.showMessageDialog(this, "Changes are saved");
+            } catch (HealthException ex) {
+                Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if(this.roli==3){
+            try {
+                PatientRepository dr=new PatientRepository();
+                Patient p = dr.findByID(this.patientID_Table);
+                String [] name=nameLabel.getText().split(" ");
+                p.setFirstName(name[0]);
+                p.setLastName(name[1]);
+                p.setEmail(emailLabel.getText());
+                p.setPhoneNumber(phoneNrLabel.getText());
+                p.setSex(sexLabel.getText());
+                p.setAddress(AddressLabel.getText());
+                p.setPassword(new String(passwordLabel.getPassword()));
+                dr.edit(p);
+                LoginRepository lr=new LoginRepository();
+                Login l=lr.findByID(p.getLoginId().getLoginID());
+                l.setPassword(new String(passwordLabel.getPassword()));
+                lr.edit(l);
+                this.dispose();
+                JOptionPane.showMessageDialog(this, "Changes are saved");
+            } catch (HealthException ex) {
+                Logger.getLogger(MySettingsFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void editNameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editNameLabelMouseClicked
+        // TODO add your handling code here:
+        nameLabel.setEditable(true);
+    }//GEN-LAST:event_editNameLabelMouseClicked
+
+    private void editEmailAddressLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editEmailAddressLabelMouseClicked
+        // TODO add your handling code here:
+        emailLabel.setEditable(true);
+    }//GEN-LAST:event_editEmailAddressLabelMouseClicked
+
+    private void editPhoneNrLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editPhoneNrLabelMouseClicked
+        // TODO add your handling code here:
+        phoneNrLabel.setEditable(true);
+    }//GEN-LAST:event_editPhoneNrLabelMouseClicked
+
+    private void editSexLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editSexLabelMouseClicked
+        // TODO add your handling code here:
+        sexLabel.setEditable(true);
+    }//GEN-LAST:event_editSexLabelMouseClicked
+
+    private void editAddressLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editAddressLabelMouseClicked
+        // TODO add your handling code here:
+        AddressLabel.setEditable(true);
+    }//GEN-LAST:event_editAddressLabelMouseClicked
+
+    private void editPasswordLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editPasswordLabelMouseClicked
+        // TODO add your handling code here:
+        passwordLabel.setEditable(true);
+    }//GEN-LAST:event_editPasswordLabelMouseClicked
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        JOptionPane.showMessageDialog(this, "You canceled you re changes");
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AddressLabel;
+    private javax.swing.JTextField AddressLabel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel editAddressLabel;
     private javax.swing.JLabel editEmailAddressLabel;
@@ -537,7 +628,7 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel editPasswordLabel;
     private javax.swing.JLabel editPhoneNrLabel;
     private javax.swing.JLabel editSexLabel;
-    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -549,10 +640,10 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel passwordLabel;
-    private javax.swing.JLabel phoneNrLabel;
-    private javax.swing.JLabel sexLabel;
+    private javax.swing.JTextField nameLabel;
+    private javax.swing.JPasswordField passwordLabel;
+    private javax.swing.JTextField phoneNrLabel;
+    private javax.swing.JTextField sexLabel;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
