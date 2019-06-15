@@ -10,6 +10,11 @@ import BLL.Patient;
 import DAL.HealthException;
 import DAL.LoginRepository;
 import DAL.PatientRepository;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -435,20 +440,26 @@ public class RegisterWindow extends javax.swing.JFrame {
         }
         return a;
     }
-    
+
     // me nda kodin masi pom vyn 2 her qikjop metod 
-    public boolean annyIsEmpty(){
-         if (usernameText.getText().trim().isEmpty() || firstNameText.getText().trim().isEmpty() || lastNameText.getText().trim().isEmpty() || passwordText.getPassword().equals("") || emailText.getText().trim().isEmpty()
-                || repeatedPasswordText.getPassword().equals("") || addressText.getText().trim().isEmpty() || phoneNumberText.getText().trim().isEmpty() || parentNameText.getText().trim().isEmpty()){
-             return true;
-         }
-         return false;
+    public boolean annyIsEmpty() {
+        if (usernameText.getText().trim().isEmpty() || firstNameText.getText().trim().isEmpty() || lastNameText.getText().trim().isEmpty() || passwordText.getPassword().equals("") || emailText.getText().trim().isEmpty()
+                || repeatedPasswordText.getPassword().equals("") || addressText.getText().trim().isEmpty() || phoneNumberText.getText().trim().isEmpty() || parentNameText.getText().trim().isEmpty()) {
+            return true;
+        }
+        return false;
     }
-    
+
+    public Date setTime(Calendar c) throws ParseException {
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String now = dateformat.format(c.getTime());
+        return new SimpleDateFormat("yyyy-MM-dd").parse(now);
+    }
+
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         String gender = null;
-        if (annyIsEmpty()){
+        if (annyIsEmpty()) {
 //            new SystemMessage("Fill all the fields !");
         } else if (!turnPasswordFieldToString(passwordText).equalsIgnoreCase(turnPasswordFieldToString(repeatedPasswordText))) {
             JOptionPane.showMessageDialog(this, "Passwords dont match !");
@@ -474,14 +485,18 @@ public class RegisterWindow extends javax.swing.JFrame {
         patient.setFirstName(firstNameText.getText());
         patient.setLastName(lastNameText.getText());
         patient.setPassword(new String(passwordText.getPassword()));
-        patient.setDateOfBirth(dateChooser.getCurrent().getTime());
+        try {
+            patient.setDateOfBirth(setTime(dateChooser.getCurrent()));
+        } catch (ParseException ex) {
+            Logger.getLogger(RegisterWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         patient.setPhoneNumber(phoneNumberText.getText());
         patient.setEmail(emailText.getText());
         patient.setAddress(addressText.getText());
         patient.setSex(gender);
         patient.setParentName(parentNameText.getText());
-        
-        try{
+
+        try {
             login.setUsername(usernameText.getText());
             login.setPassword(new String(passwordText.getPassword()));
             login.setRoli(3);
@@ -489,15 +504,15 @@ public class RegisterWindow extends javax.swing.JFrame {
         } catch (HealthException ex) {
             Logger.getLogger(RegisterWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        try{
+
+        try {
             pr.create(patient);
-           if (!annyIsEmpty()) {
-            this.dispose();
-            JOptionPane.showMessageDialog(this, "You ve registered succesfully!");
-        }
-            
-        }catch(HealthException e){
+            if (!annyIsEmpty()) {
+                this.dispose();
+                JOptionPane.showMessageDialog(this, "You ve registered succesfully!");
+            }
+
+        } catch (HealthException e) {
             e.printStackTrace();
         }
 //        try {
@@ -536,7 +551,7 @@ public class RegisterWindow extends javax.swing.JFrame {
 //            this.dispose();
 //            new SystemMessage("You have been registered succesfully");
 //        }
-        
+
     }//GEN-LAST:event_registerButtonActionPerformed
 
     public boolean patientExists(Patient a) throws HealthException {

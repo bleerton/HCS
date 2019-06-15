@@ -93,7 +93,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         patientNameText = new javax.swing.JTextField();
-        parentNameText = new javax.swing.JTextField();
+        patientParentNameText = new javax.swing.JTextField();
         patientLastNameText = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         dateChooser = new datechooser.beans.DateChooserCombo();
@@ -107,10 +107,8 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         diagnosisText = new javax.swing.JTextArea();
         newButton = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        reportIDLabel = new javax.swing.JLabel();
         comboBox = new javax.swing.JComboBox();
         jLabel18 = new javax.swing.JLabel();
 
@@ -202,14 +200,22 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Name:");
 
+        doctorNameText.setEditable(false);
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Last Name:");
+
+        doctorLastName.setEditable(false);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Phone NR.");
 
+        doctorPhoneNumberText.setEditable(false);
+
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Doctor ID:");
+
+        doctorIDText.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -270,6 +276,8 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("ID:                    ");
 
+        patientIDText.setEditable(false);
+
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Name :");
 
@@ -279,11 +287,19 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Parent Name :");
 
+        patientNameText.setEditable(false);
+
+        patientParentNameText.setEditable(false);
+
+        patientLastNameText.setEditable(false);
+
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Date of Birth:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Address :");
+
+        patientAddressText.setEditable(false);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Gender:");
@@ -319,7 +335,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(parentNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(patientParentNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -360,7 +376,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(patientIDText)
-                        .addGap(3, 3, 3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(patientNameText))
@@ -369,7 +385,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(parentNameText)))
+                        .addComponent(patientParentNameText)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -422,21 +438,17 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        newButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        newButton.setText("New Drug Therapy");
+        newButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        newButton.setText("New Report");
         newButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newButtonActionPerformed(evt);
             }
         });
 
-        jLabel21.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel21.setText("Report ID");
+        jPanel5.setBackground(new java.awt.Color(0, 168, 255));
 
-        jPanel5.setBackground(new java.awt.Color(53, 120, 229));
-
-        jLabel1.setBackground(new java.awt.Color(53, 120, 229));
+        jLabel1.setBackground(new java.awt.Color(0, 168, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("            Report Guidance");
@@ -453,8 +465,6 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        reportIDLabel.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -490,11 +500,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(323, 323, 323)
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reportIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(458, 458, 458))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,10 +522,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reportIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
 
@@ -582,6 +585,9 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this,"Report to this ID sent!");
                 clearFields();
                 rr.create(r);
+            }else{
+                JOptionPane.showMessageDialog(this, "You already created an report with this id !");
+                clearFields();
             }
             
         }catch(HealthException ex){
@@ -590,6 +596,24 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_newButtonActionPerformed
 
     public void clearFields(){
+        codeText.setText("");
+        cityText.setText("");
+        publicRadioBox.setSelected(false);
+        privateRadioBox.setSelected(false);
+        doctorNameText.setText("");
+        doctorLastName.setText("");
+        doctorPhoneNumberText.setText("");
+        doctorIDText.setText("");
+        patientIDText.setText("");
+        patientLastNameText.setText("");
+        patientAddressText.setText("");
+        patientNameText.setText("");
+        patientParentNameText.setText("");
+        patientIDText.setText("");
+        patientIDText.setText("");
+        maleButton.setSelected(true);
+        femaleButton.setSelected(false);
+        diagnosisText.setText("");
         
     }
     
@@ -620,7 +644,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
             patientIDText.setText(p.getPatientID() + "");
             patientNameText.setText(p.getFirstName());
             patientLastNameText.setText(p.getLastName());
-            parentNameText.setText(p.getParentName());
+            patientParentNameText.setText(p.getParentName());
             patientAddressText.setText(p.getAddress());
             if (p.getSex().equalsIgnoreCase("Female")) {
                 femaleButton.setSelected(true);
@@ -692,7 +716,6 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -708,15 +731,14 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton maleButton;
     private javax.swing.JButton newButton;
-    private javax.swing.JTextField parentNameText;
     private javax.swing.JTextField patientAddressText;
     private javax.swing.JTextField patientIDText;
     private javax.swing.JTextField patientLastNameText;
     private java.util.List<BLL.Patient> patientList;
     private javax.swing.JTextField patientNameText;
+    private javax.swing.JTextField patientParentNameText;
     private javax.persistence.Query patientQuery;
     private javax.swing.JRadioButton privateRadioBox;
     private javax.swing.JRadioButton publicRadioBox;
-    private javax.swing.JLabel reportIDLabel;
     // End of variables declaration//GEN-END:variables
 }

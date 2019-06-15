@@ -40,16 +40,14 @@ public class AdminWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(1276, 683, 683, 683));
-        setMaximumSize(new java.awt.Dimension(1411, 830));
         setMinimumSize(new java.awt.Dimension(1411, 830));
-        setPreferredSize(new java.awt.Dimension(1411, 830));
 
         mainPanel.setMaximumSize(new java.awt.Dimension(1276, 683));
         mainPanel.setMinimumSize(new java.awt.Dimension(1276, 683));
 
-        headerPanel.setBackground(new java.awt.Color(51, 153, 255));
+        headerPanel.setBackground(new java.awt.Color(33, 176, 195));
 
-        jLabel2.setBackground(new java.awt.Color(51, 153, 255));
+        jLabel2.setBackground(new java.awt.Color(33, 176, 195));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Admin Panel");
@@ -66,7 +64,7 @@ public class AdminWindow extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
         );
@@ -81,10 +79,9 @@ public class AdminWindow extends javax.swing.JFrame {
         );
 
         iconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/admin3.png"))); // NOI18N
         iconLabel.setToolTipText("");
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(33, 176, 195));
 
         welcomeLabel.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,8 +122,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addContainerGap(283, Short.MAX_VALUE))
         );
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/patientdetailsss.png"))); // NOI18N
-        jButton2.setText("jButton2");
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/healthcare-icon.png"))); // NOI18N
         jButton2.setMaximumSize(new java.awt.Dimension(321, 185));
         jButton2.setMinimumSize(new java.awt.Dimension(321, 185));
         jButton2.setPreferredSize(new java.awt.Dimension(321, 185));
@@ -136,14 +133,14 @@ public class AdminWindow extends javax.swing.JFrame {
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 612, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +152,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

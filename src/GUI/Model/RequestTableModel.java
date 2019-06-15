@@ -6,7 +6,7 @@
 package GUI.Model;
 
 import BLL.Request;
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,17 +52,17 @@ public class RequestTableModel extends AbstractTableModel {
         list.remove(row);
     }
 
-    //metode qe e kthen kohen edhe daten e tanishme 
-    public String getTime() {
-//        java.util.Date dt = new java.util.Date();
-//                java.text.SimpleDateFormat sdf = 
-//                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                return sdf.format(dt);
-
-        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar calendar = Calendar.getInstance();
-        return dateformat.format(calendar.getTime());
-    }
+//    //metode qe e kthen kohen edhe daten e tanishme 
+//    public String getTime() {
+////        java.util.Date dt = new java.util.Date();
+////                java.text.SimpleDateFormat sdf = 
+////                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////                return sdf.format(dt);
+//
+//        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Calendar calendar = Calendar.getInstance();
+//        return dateformat.format(calendar.getTime());
+//    }
 
     public Request getRequest(int index) {
         return list.get(index);
@@ -78,7 +78,7 @@ public class RequestTableModel extends AbstractTableModel {
             case 1:
                 return a.getDoctorID().toString();
             case 2:
-                return getTime();
+                return a.getDate();
             case 3:
                 return a.getStatus();
             default:

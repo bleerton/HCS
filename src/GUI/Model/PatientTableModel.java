@@ -7,6 +7,8 @@ package GUI.Model;
 
 import BLL.Appointment;
 import BLL.Patient;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -62,7 +64,8 @@ public class PatientTableModel extends AbstractTableModel{
             case 2:
                 return a.getLastName();
             case 3:
-                return a.getDateOfBirth();
+                DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+                return dateformat.format(a.getDateOfBirth());
             case 4:
                 return a.getSex();
             case 5:

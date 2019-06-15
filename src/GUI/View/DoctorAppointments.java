@@ -15,9 +15,15 @@ import DAL.HealthException;
 import DAL.PatientRepository;
 import DAL.RequestRepository;
 import GUI.Model.RequestTableModel;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +35,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
     RequestTableModel rtm = new RequestTableModel();
     RequestRepository rr = new RequestRepository();
     AppointmentRepository ar = new AppointmentRepository();
-    
+
     private int doctorID_Table;
 
     public void setDoctorIDTable(int ptd) {
@@ -81,6 +87,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         noteText = new javax.swing.JTextArea();
+        timeComboBox = new javax.swing.JComboBox<>();
         scrollPane = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
@@ -126,35 +133,43 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
         noteText.setRows(5);
         jScrollPane1.setViewportView(noteText);
 
+        timeComboBox.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        timeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(locationText, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(161, 161, 161)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(locationText, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(120, 120, 120)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(timeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(176, 176, 176)
+                                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(222, 222, 222)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(222, 222, 222)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,10 +186,11 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                        .addComponent(locationText))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(timeComboBox, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(locationText, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -188,7 +204,7 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Requester Name", "Assigned To", "DueBy", "Status"
+                "Requester Name", "Assigned To", "Requested in", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -242,7 +258,6 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
 //        }
 //        return date1;
 //    }
-    
     //me kqyr nese naj textField ose najsen qe duhet mu shkru nga useri a osht e zbrazet
     public boolean anyIsEmpty() {
         if (dateChooser == null) {
@@ -258,6 +273,23 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
         return false;
     }
 
+    public Date ktheNgaComboBox(Date d) {
+        try {
+            DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+            String turnedString = dateformat.format(d);
+            String  ktheNdate = turnedString +" "+ timeComboBox.getSelectedItem()+":00";
+            
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return df.parse(ktheNdate);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Before you confirm ,Select time and date");
+        } catch (ParseException ex) {
+            Logger.getLogger(DoctorAppointments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }   
+
+
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         int row = table.getSelectedRow();
         if (row == -1) {
@@ -266,8 +298,8 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
             Request r = rtm.getRequest(row);
             r.setStatus("Confirmed");
             try {
-
                 rr.edit(r);
+
                 Appointment app = new Appointment();
                 app.setFirstNameOfPatient(r.getPatientID().getFirstName());
                 app.setLastNameOfPatient(r.getPatientID().getLastName());
@@ -284,7 +316,8 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
                 if (anyIsEmpty()) {
                     return;
                 }
-                app.setDateTime(this.dateChooser.getCurrent().getTime());
+                app.setDateTime(ktheNgaComboBox(this.dateChooser.getCurrent().getTime()));
+                ktheNgaComboBox(dateChooser.getCurrent().getTime());
 
                 app.setNote(noteText.getText());
                 app.setLocation(locationText.getText());
@@ -353,5 +386,6 @@ public class DoctorAppointments extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea noteText;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable table;
+    private javax.swing.JComboBox<String> timeComboBox;
     // End of variables declaration//GEN-END:variables
 }

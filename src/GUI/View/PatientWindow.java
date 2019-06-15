@@ -8,9 +8,13 @@ package GUI.View;
 import BLL.Patient;
 import DAL.HealthException;
 import DAL.PatientRepository;
-import java.awt.Desktop;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,10 +28,20 @@ import javax.swing.JRootPane;
  */
 public class PatientWindow extends javax.swing.JFrame {
 
-    public void changeProfileLabel(String firstname) {
-        if (!firstname.trim().isEmpty()) {
-            nameLabel.setText(firstname + " ");
+    public void loadLabels(String name, String username, String address, Date date, String email, String phoneNr) throws HealthException {
+        if (name.trim().isEmpty() || username.trim().isEmpty() || address.trim().isEmpty() || date == null || email.trim().isEmpty() || phoneNr.trim().isEmpty()) {
+            throw new HealthException("Missing statements");
+        } else {
+            nameLabel.setText(name);
+            usernameLabel.setText(username);
+            DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+            String formatedDate = dateformat.format(date);
+            dateOfBirthLabel.setText(formatedDate);
+            emailLabel.setText(email);
+            addressLabel.setText(address);
+            phoneNumberLabel.setText(phoneNr);
         }
+
     }
     //Atribut qe me rujt ID e profilit qe osht LOGGED-IN per momentin
     private int patient_ID_Profile;
@@ -69,11 +83,21 @@ public class PatientWindow extends javax.swing.JFrame {
                 g.drawImage(image, 0, 0, getWidth(),getHeight(),this);
             }
         };
-        profilePanel = new javax.swing.JPanel();
-        nameLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        usernamePanel = new javax.swing.JPanel();
+        usernameLabel = new javax.swing.JLabel();
+        settingsButton = new javax.swing.JButton();
         profileInfoPanel = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        ddddd = new javax.swing.JLabel();
+        dateOfBirthLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        addressLabel = new javax.swing.JLabel();
+        labelb = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        phoneNumberLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -233,44 +257,49 @@ public class PatientWindow extends javax.swing.JFrame {
             .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        profilePanel.setBackground(new java.awt.Color(250, 250, 250));
-        profilePanel.setMaximumSize(new java.awt.Dimension(208, 57));
+        usernamePanel.setBackground(new java.awt.Color(250, 250, 250));
+        usernamePanel.setMaximumSize(new java.awt.Dimension(208, 57));
 
-        nameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nameLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/doctor.png"))); // NOI18N
-        nameLabel.setText("FILAN FILANI");
-        nameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        usernameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        usernameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usernameLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/doctor.png"))); // NOI18N
+        usernameLabel.setText("FILAN FILANI");
+        usernameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                nameLabelMouseEntered(evt);
+                usernameLabelMouseEntered(evt);
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/logginButton.png"))); // NOI18N
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setMaximumSize(new java.awt.Dimension(44, 32));
-        jButton1.setMinimumSize(new java.awt.Dimension(44, 32));
-        jButton1.setPreferredSize(new java.awt.Dimension(44, 32));
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/logginButton.png"))); // NOI18N
-        jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/login2.png"))); // NOI18N
+        settingsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/logginButton.png"))); // NOI18N
+        settingsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        settingsButton.setMaximumSize(new java.awt.Dimension(44, 32));
+        settingsButton.setMinimumSize(new java.awt.Dimension(44, 32));
+        settingsButton.setPreferredSize(new java.awt.Dimension(44, 32));
+        settingsButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/logginButton.png"))); // NOI18N
+        settingsButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/login2.png"))); // NOI18N
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsButtonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
-        profilePanel.setLayout(profilePanelLayout);
-        profilePanelLayout.setHorizontalGroup(
-            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        javax.swing.GroupLayout usernamePanelLayout = new javax.swing.GroupLayout(usernamePanel);
+        usernamePanel.setLayout(usernamePanelLayout);
+        usernamePanelLayout.setHorizontalGroup(
+            usernamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(usernamePanelLayout.createSequentialGroup()
+                .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        profilePanelLayout.setVerticalGroup(
-            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profilePanelLayout.createSequentialGroup()
+        usernamePanelLayout.setVerticalGroup(
+            usernamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, usernamePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(usernamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -288,16 +317,84 @@ public class PatientWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(Color.LIGHT_GRAY);
+        jLabel1.setText(" Name:");
+        jLabel1.setOpaque(true);
+
+        nameLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        nameLabel.setText("Boss Bossi");
+
+        jLabel1.setBackground(Color.LIGHT_GRAY);
+        ddddd.setText(" Date of Birth:");
+        ddddd.setOpaque(true);
+
+        dateOfBirthLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        dateOfBirthLabel.setText("03.06.1999");
+
+        jLabel1.setBackground(Color.LIGHT_GRAY);
+        jLabel5.setText(" Address:");
+        jLabel5.setOpaque(true);
+
+        addressLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        addressLabel.setText("Fushe Kosove");
+
+        jLabel1.setBackground(Color.LIGHT_GRAY);
+        labelb.setText(" Email:");
+        labelb.setOpaque(true);
+
+        emailLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        emailLabel.setText("eniskraasniqi@gmail.com");
+
+        jLabel1.setBackground(Color.LIGHT_GRAY);
+        jLabel2.setText(" Phone Number:");
+        jLabel2.setOpaque(true);
+
+        phoneNumberLabel.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        phoneNumberLabel.setText("083-353-985");
+
         javax.swing.GroupLayout profileInfoPanelLayout = new javax.swing.GroupLayout(profileInfoPanel);
         profileInfoPanel.setLayout(profileInfoPanelLayout);
         profileInfoPanelLayout.setHorizontalGroup(
             profileInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ddddd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(profileInfoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(profileInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateOfBirthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(phoneNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         profileInfoPanelLayout.setVerticalGroup(
             profileInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileInfoPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(ddddd, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(dateOfBirthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(labelb, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(phoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -379,7 +476,7 @@ public class PatientWindow extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usernamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -387,7 +484,7 @@ public class PatientWindow extends javax.swing.JFrame {
             .addComponent(sideMenuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usernamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(profileInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
         );
@@ -395,13 +492,8 @@ public class PatientWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
-        LoginSettings a = new LoginSettings();
-        desktopPane.add(a);
+
     }//GEN-LAST:event_menuButtonActionPerformed
 
     private void favouriteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favouriteButtonActionPerformed
@@ -411,6 +503,7 @@ public class PatientWindow extends javax.swing.JFrame {
     public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
         for (int i = 0; i < allFrames.length; i++) {
+            allFrames[i].dispose();
             desktopPane.remove(allFrames[i]);
         }
     }
@@ -449,9 +542,9 @@ public class PatientWindow extends javax.swing.JFrame {
         new NotificationFrame().setVisible(true);
     }//GEN-LAST:event_documentButtonActionPerformed
 
-    private void nameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameLabelMouseEntered
+    private void usernameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseEntered
 
-    }//GEN-LAST:event_nameLabelMouseEntered
+    }//GEN-LAST:event_usernameLabelMouseEntered
 
     private void appointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentsButtonActionPerformed
         // TODO add your handling code here:
@@ -473,10 +566,31 @@ public class PatientWindow extends javax.swing.JFrame {
         } catch (HealthException ex) {
             return;
         }
-        
+
         t.show();
     }//GEN-LAST:event_myPatientsActionPerformed
 
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        terminateFrames();
+        MySettingsFrame ms = new MySettingsFrame();
+        ms.setPatientIDTable(this.patient_ID_Profile);
+        desktopPane.add(ms);
+        ms.loadLabelsForPatient();
+        putJInternalFrameInCenter(ms);
+        ms.show();
+    }//GEN-LAST:event_settingsButtonActionPerformed
+
+    public void putJInternalFrameInCenter(JInternalFrame ms){
+        Dimension desktopSize = desktopPane.getSize();
+        Dimension jInternalFrameSize = ms.getSize();
+        ms.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -514,21 +628,28 @@ public class PatientWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JLabel addressLabel;
     private javax.swing.JButton appointmentsButton;
     private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
+    private javax.swing.JLabel dateOfBirthLabel;
+    private javax.swing.JLabel ddddd;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JButton documentButton;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton favouriteButton;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel labelb;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
@@ -537,11 +658,14 @@ public class PatientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JPanel profileInfoPanel;
-    private javax.swing.JPanel profilePanel;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JButton settingsButton;
     private javax.swing.JPanel sideMenuBar;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JPanel usernamePanel;
     // End of variables declaration//GEN-END:variables
 
 }

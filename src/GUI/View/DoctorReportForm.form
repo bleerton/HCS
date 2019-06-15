@@ -88,11 +88,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="newButton" min="-2" pref="161" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
-              <Component id="jLabel21" min="-2" pref="63" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="reportIDLabel" min="-2" pref="56" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,11 +116,7 @@
               </Group>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel21" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="reportIDLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="newButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-              </Group>
+              <Component id="newButton" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -345,6 +337,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="doctorNameText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -355,6 +350,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="doctorLastName">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -365,6 +363,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="doctorPhoneNumberText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -375,6 +376,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="doctorIDText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -405,7 +409,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel15" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="parentNameText" min="-2" pref="330" max="-2" attributes="0"/>
+                                  <Component id="patientParentNameText" min="-2" pref="330" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -462,7 +466,7 @@
                       <Component id="jLabel12" min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="patientIDText" max="32767" attributes="0"/>
-                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -474,7 +478,7 @@
                       <Component id="jLabel15" min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                          <Component id="parentNameText" max="32767" attributes="0"/>
+                          <Component id="patientParentNameText" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -527,6 +531,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="patientIDText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -553,10 +560,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="patientNameText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="parentNameText">
+        <Component class="javax.swing.JTextField" name="patientParentNameText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="patientLastNameText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
@@ -577,6 +593,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="patientAddressText">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel19">
           <Properties>
@@ -672,29 +691,18 @@
     <Component class="javax.swing.JButton" name="newButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="0"/>
+          <Font name="Times New Roman" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="New Drug Therapy"/>
+        <Property name="text" type="java.lang.String" value="New Report"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel21">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="12" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="cc" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Report ID"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JPanel" name="jPanel5">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="e5" green="78" red="35" type="rgb"/>
+          <Color blue="ff" green="a8" red="0" type="rgb"/>
         </Property>
       </Properties>
 
@@ -717,7 +725,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e5" green="78" red="35" type="rgb"/>
+              <Color blue="ff" green="a8" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
@@ -730,13 +738,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="reportIDLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="12" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JComboBox" name="comboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">

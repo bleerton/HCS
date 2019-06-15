@@ -16,7 +16,12 @@ import DAL.PatientRepository;
 import DAL.RequestRepository;
 import GUI.Model.AppointmentTableModel;
 import GUI.Model.RequestTableModel;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,26 +60,26 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    private void tabelaSelectedIndexChange() {
-        final ListSelectionModel rowSM = table.getSelectionModel();
-        rowSM.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent Ise) {
-                if (Ise.getValueIsAdjusting()) {
-                    return;
-                }
-                ListSelectionModel rowSM = (ListSelectionModel) Ise.getSource();
-                int selectedIndex = rowSM.getAnchorSelectionIndex();
-                if (selectedIndex > -1) {
-//                  EntityName en = entm.getEntityName(selectedIndex);
-                    Appointment p = atm.getAppointment(selectedIndex);
-
-                    doctorComboBox.setSelectedItem(p.getAppointmentID());
-                    doctorComboBox.repaint();
-
-                }
-            }
-        });
-    }
+//    private void tabelaSelectedIndexChange() {
+//        final ListSelectionModel rowSM = table.getSelectionModel();
+//        rowSM.addListSelectionListener(new ListSelectionListener() {
+//            public void valueChanged(ListSelectionEvent Ise) {
+//                if (Ise.getValueIsAdjusting()) {
+//                    return;
+//                }
+//                ListSelectionModel rowSM = (ListSelectionModel) Ise.getSource();
+//                int selectedIndex = rowSM.getAnchorSelectionIndex();
+//                if (selectedIndex > -1) {
+////                  EntityName en = entm.getEntityName(selectedIndex);
+//                    Appointment p = atm.getAppointment(selectedIndex);
+//
+//                    doctorComboBox.setSelectedItem(p.getAppointmentID());
+//                    doctorComboBox.repaint();
+//
+//                }
+//            }
+//        });
+//    }
 
     public void loadTable() {
         try {
@@ -104,7 +109,6 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
                     listByID.add(request);
                 }
             }
-
             rtm.addList(listByID);
             table2.setModel(rtm);
             rtm.fireTableDataChanged();
@@ -132,6 +136,7 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
         cancelButton = new javax.swing.JButton();
         doctorComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         scrollPane = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         bottomTable = new javax.swing.JPanel();
@@ -174,24 +179,32 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Choose My Doctor");
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel4.setText("Confirmed Appointments");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(417, 417, 417)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(doctorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(doctorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addComponent(requestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(417, 417, 417)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +218,8 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
                         .addComponent(requestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(doctorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                .addGap(13, 13, 13)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         scrollPane.setBackground(new java.awt.Color(250, 250, 250));
@@ -249,7 +263,7 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
 
         bottomTable.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("Requested Appointments");
 
         javax.swing.GroupLayout bottomTableLayout = new javax.swing.GroupLayout(bottomTable);
@@ -279,7 +293,7 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Requester Name", "Assigned To", "DueBy", "Status"
+                "Requester Name", "Assigned To", "Requested in ", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -349,30 +363,40 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
         return null;
     }
 
+    public Date getCurrentTime() throws ParseException {
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        String now = dateformat.format(calendar.getTime());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
+    }
+
 
     private void requestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonActionPerformed
         try {
             List<Appointment> allAppointments = ar.findAll();
-            
+
             Patient p = findPatientByID(this.patientID_Table);
             Request r = new Request();
             r.setDoctorID(((Doctor) doctorComboBox.getSelectedItem()));
+            r.setDate(getCurrentTime());
             r.setPatientID(p);
             r.setStatus("Pending");
-            for (Appointment app: allAppointments) {
-                if ( (app.getDoctorID().getDoctorID() == r.getDoctorID().getDoctorID()) && (app.getPatientID().getPatientID() == r.getPatientID().getPatientID()) ) {
-                    JOptionPane.showMessageDialog(this,"Can t create a new request while u have an appointment with this ID");
+            for (Appointment app : allAppointments) {
+                if ((app.getDoctorID().getDoctorID() == r.getDoctorID().getDoctorID()) && (app.getPatientID().getPatientID() == r.getPatientID().getPatientID())) {
+                    JOptionPane.showMessageDialog(this, "Can t create a new request while u have an appointment with this ID");
                     return;
                 }
             }
             if (!Request.exists(r)) {
                 rr.create(r);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "U already requested to this doctor !");
                 return;
             }
             JOptionPane.showMessageDialog(this, "You ve sent a request to the doctor!");
         } catch (HealthException ex) {
+            Logger.getLogger(PatientAppointments.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(PatientAppointments.class.getName()).log(Level.SEVERE, null, ex);
         }
         loadTable2();
@@ -432,6 +456,7 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton requestButton;
     private javax.swing.JScrollPane scrollPane;

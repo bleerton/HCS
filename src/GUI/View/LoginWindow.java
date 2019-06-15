@@ -12,7 +12,10 @@ import DAL.DoctorRepository;
 import DAL.HealthException;
 import DAL.LoginRepository;
 import DAL.PatientRepository;
+import java.awt.Font;
+import java.awt.font.TextAttribute;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -199,6 +202,12 @@ public class LoginWindow extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registerLabelMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registerLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registerLabelMouseExited(evt);
+            }
         });
 
         passwordField.setBackground(new java.awt.Color(228, 228, 228));
@@ -308,8 +317,9 @@ public class LoginWindow extends javax.swing.JFrame {
                 this.dispose();
                 new ConfirmNotification().setVisible(true);
                 DoctorWindow dw = new DoctorWindow();
-                dw.setLocationRelativeTo(null);         
-                dw.changeProfileLabel(findDoctorName(username).getFirstName() + " " + findDoctorName(username).getLastName());          ///Te 3 jat qishtu e gjejm ID permes username
+                dw.setLocationRelativeTo(null);
+                Doctor dr = findDoctorName(username);
+                dw.loadLabels(dr.getFirstName()+" "+dr.getLastName(), username, dr.getAddress(), dr.getDateOfBirth(), dr.getEmail(), dr.getPhoneNumber());        ///Te 3 jat qishtu e gjejm ID permes username
                 dw.setDoctorIDProfile(findDoctorName(username).getDoctorID());
             } else if (l.getRoli() == 1 && this.roli == 1) {
                 this.dispose();
@@ -320,7 +330,8 @@ public class LoginWindow extends javax.swing.JFrame {
                 new ConfirmNotification().setVisible(true);
                 PatientWindow pw = new PatientWindow();
                 pw.setLocationRelativeTo(null);
-                pw.changeProfileLabel(findPatientName(username).getFirstName() + " " + findPatientName(username).getLastName());
+                Patient pt = findPatientName(username);
+                pw.loadLabels(pt.getFirstName()+" "+pt.getLastName(), username, pt.getAddress(), pt.getDateOfBirth(), pt.getEmail(), pt.getPhoneNumber());
                 pw.setPatientIDProfile(findPatientName(username).getPatientID());
             } else {
                 JOptionPane.showMessageDialog(this, "This Account doesnt match the window");
@@ -398,6 +409,13 @@ public class LoginWindow extends javax.swing.JFrame {
         this.dispose();
         new StartingPage().setVisible(true);
     }//GEN-LAST:event_returnBackButtonMouseClicked
+
+    private void registerLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLabelMouseEntered
+      
+    }//GEN-LAST:event_registerLabelMouseEntered
+
+    private void registerLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLabelMouseExited
+    }//GEN-LAST:event_registerLabelMouseExited
 
     /**
      * @param args the command line arguments
