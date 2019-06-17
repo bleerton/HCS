@@ -248,6 +248,7 @@ public class AdminWindow extends javax.swing.JFrame {
          AddDoctorFrame ad = new AddDoctorFrame();
          ad.setVisible(true);
          ad.setLocationRelativeTo(null);
+         ad.setPatientOrDoctor(2);
     }//GEN-LAST:event_addDoctorButtonActionPerformed
 
     private void AppointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppointmentsButtonActionPerformed
@@ -265,6 +266,7 @@ public class AdminWindow extends javax.swing.JFrame {
         ad.setLocationRelativeTo(null);
         ad.getSpecializationLabel().setText("Parent Name:");
         ad.getTitleLabel().setText("Patient Management");
+        ad.setPatientOrDoctor(3);
     }//GEN-LAST:event_addPatientButtonActionPerformed
 
     public void hideButtons(){

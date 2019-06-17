@@ -5,8 +5,24 @@
  */
 package GUI.View.Admin;
 
+import BLL.Doctor;
+import BLL.Login;
+import BLL.Patient;
+import DAL.DoctorRepository;
+import DAL.HealthException;
+import DAL.LoginRepository;
+import DAL.PatientRepository;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -21,6 +37,16 @@ public class AddDoctorFrame extends javax.swing.JFrame {
     public AddDoctorFrame() {
         initComponents();
         setVisible(true);
+    }
+
+    private int PatientOrDoctor;
+
+    public void setPatientOrDoctor(int i) {
+        this.PatientOrDoctor = i;
+    }
+
+    public int getPatientOrDoctor() {
+        return PatientOrDoctor;
     }
 
     public JLabel getSpecializationLabel() {
@@ -46,8 +72,29 @@ public class AddDoctorFrame extends javax.swing.JFrame {
     public void setTitleLabel(JLabel titleLabel) {
         this.titleLabel = titleLabel;
     }
-    
-    
+
+    public Date setTime(Calendar c) throws ParseException {
+        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String now = dateformat.format(c.getTime());
+        return new SimpleDateFormat("yyyy-MM-dd").parse(now);
+    }
+
+    public String turnPasswordFieldToString(JPasswordField passwordField) {
+        char[] chars = passwordField.getPassword();
+        String a = "";
+        for (int i = 0; i < chars.length; i++) {
+            a += "" + chars[i];
+        }
+        return a;
+    }
+
+    public boolean annyIsEmpty() {
+        if (usernameText.getText().trim().isEmpty() || FirstNameText.getText().trim().isEmpty() || lastNameText.getText().trim().isEmpty() || passwordText.getPassword().equals("") || emailText.getText().trim().isEmpty()
+                || repeatPasswordText.getPassword().equals("") || addressText.getText().trim().isEmpty() || phoneNrText.getText().trim().isEmpty() || specializationText.getText().trim().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,8 +119,8 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         usernameText = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
         repeatedLabelPassword = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
-        repeatPasswordLabel = new javax.swing.JPasswordField();
+        passwordText = new javax.swing.JPasswordField();
+        repeatPasswordText = new javax.swing.JPasswordField();
         firstNameLabel6 = new javax.swing.JLabel();
         emailText = new javax.swing.JTextField();
         dateOfBirthLabel = new javax.swing.JLabel();
@@ -89,10 +136,8 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(842, 602));
         setMinimumSize(new java.awt.Dimension(842, 602));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(842, 602));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(204, 204, 204)));
@@ -123,6 +168,12 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         firstNameLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         firstNameLabel.setText(" First Name:");
         firstNameLabel.setOpaque(true);
+
+        FirstNameText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FirstNameTextActionPerformed(evt);
+            }
+        });
 
         titleLabel.setBackground(Color.LIGHT_GRAY);
         specializationLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -234,9 +285,9 @@ public class AddDoctorFrame extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(maleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(femaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(femaleButton))
                             .addComponent(addressLabel))
-                        .addContainerGap())
+                        .addContainerGap(401, Short.MAX_VALUE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -260,8 +311,8 @@ public class AddDoctorFrame extends javax.swing.JFrame {
                                     .addComponent(usernameText)
                                     .addComponent(passwordLabel)
                                     .addComponent(repeatedLabelPassword)
-                                    .addComponent(passwordField)
-                                    .addComponent(repeatPasswordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                                    .addComponent(passwordText)
+                                    .addComponent(repeatPasswordText, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                                 .addGap(75, 75, 75))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +342,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(specializationText, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                            .addComponent(passwordField))
+                            .addComponent(passwordText))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,7 +350,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(repeatPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(repeatPasswordText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -345,6 +396,105 @@ public class AddDoctorFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        if (PatientOrDoctor == 2) {
+            Login l = new Login();
+            LoginRepository lr = new LoginRepository();
+            Doctor d = new Doctor();
+            DoctorRepository dr = new DoctorRepository();
+
+            d.setFirstName(FirstNameText.getText());
+            d.setLastName(lastNameText.getText());
+            d.setSpecalization(specializationText.getText());
+            d.setEmail(emailText.getText());
+            d.setAddress(addressText.getText());
+            try {
+                d.setDateOfBirth(setTime(dateChooser.getCurrent()));
+            } catch (ParseException ex) {
+                Logger.getLogger(AddDoctorFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (maleButton.isSelected()) {
+                d.setSex("Male");
+            } else if (femaleButton.isSelected()) {
+                d.setSex("Female");
+            } else {
+                JOptionPane.showMessageDialog(this, "Gender is not selected");
+            }
+            d.setPhoneNumber(phoneNrText.getText());
+            try {
+                d.setUsername(usernameText.getText());
+                l.setUsername(usernameText.getText());
+                if (!turnPasswordFieldToString(passwordText).equalsIgnoreCase(turnPasswordFieldToString(repeatPasswordText))) {
+                    JOptionPane.showMessageDialog(this, "Passwords dont match !");
+                    passwordText.setText("");
+                    repeatPasswordText.setText("");
+                } else {
+                    d.setPassword(new String(passwordText.getPassword()));
+                    l.setPassword(new String(passwordText.getPassword()));
+                }
+                l.setRoli(2);
+                lr.create(l);
+                d.setLoginID(l);
+                if (annyIsEmpty()) {
+                    this.dispose();
+                    JOptionPane.showMessageDialog(this, "You ve not registered succesfully!");
+                } else {
+                    dr.create(d);
+                    this.dispose();
+                }
+            } catch (HealthException ex) {
+                Logger.getLogger(AddDoctorFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (PatientOrDoctor == 3) {
+            Login l = new Login();
+            LoginRepository lr = new LoginRepository();
+            Patient d = new Patient();
+            PatientRepository dr = new PatientRepository();
+
+            d.setFirstName(FirstNameText.getText());
+            d.setLastName(lastNameText.getText());
+            d.setParentName(specializationText.getText());
+            d.setEmail(emailText.getText());
+            d.setAddress(addressText.getText());
+            try {
+                d.setDateOfBirth(setTime(dateChooser.getCurrent()));
+            } catch (ParseException ex) {
+                Logger.getLogger(AddDoctorFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (maleButton.isSelected()) {
+                d.setSex("Male");
+            } else if (femaleButton.isSelected()) {
+                d.setSex("Female");
+            } else {
+                JOptionPane.showMessageDialog(this, "Gender is not selected");
+            }
+            d.setPhoneNumber(phoneNrText.getText());
+            try {
+                d.setUsername(usernameText.getText());
+                l.setUsername(usernameText.getText());
+                if (!turnPasswordFieldToString(passwordText).equalsIgnoreCase(turnPasswordFieldToString(repeatPasswordText))) {
+                    JOptionPane.showMessageDialog(this, "Passwords dont match !");
+                    passwordText.setText("");
+                    repeatPasswordText.setText("");
+                } else {
+                    d.setPassword(new String(passwordText.getPassword()));
+                    l.setPassword(new String(passwordText.getPassword()));
+                }
+                l.setRoli(3);
+                lr.create(l);
+                d.setLoginId(l);
+                if (annyIsEmpty()) {
+                    this.dispose();
+                    JOptionPane.showMessageDialog(this, "You ve not registered succesfully!");
+                } else {
+                    dr.create(d);
+                    this.dispose();
+                }
+            } catch (HealthException ex) {
+                Logger.getLogger(AddDoctorFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Can not define if it s a doctor or patient.");
+        }
 
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -352,6 +502,11 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void FirstNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameTextActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_FirstNameTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,12 +559,12 @@ public class AddDoctorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField lastNameText;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JRadioButton maleButton;
-    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JPasswordField passwordText;
     private javax.swing.JLabel phoneNrLabel;
     private javax.swing.JTextField phoneNrText;
     private javax.swing.JLabel profileLabel;
-    private javax.swing.JPasswordField repeatPasswordLabel;
+    private javax.swing.JPasswordField repeatPasswordText;
     private javax.swing.JLabel repeatedLabelPassword;
     private javax.swing.JLabel sexLabel;
     private javax.swing.JLabel specializationLabel;
