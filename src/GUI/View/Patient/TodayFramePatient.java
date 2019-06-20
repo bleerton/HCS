@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.View.Doctor;
+package GUI.View.Patient;
 
 import BLL.Appointment;
 import DAL.AppointmentRepository;
@@ -20,36 +20,29 @@ import javax.swing.JOptionPane;
  *
  * @author Enis
  */
-public class TodayFrame extends javax.swing.JInternalFrame {
+public class TodayFramePatient extends javax.swing.JInternalFrame {
 
     AppointmentTableModel atm = new AppointmentTableModel();
     AppointmentRepository ar = new AppointmentRepository();
 
-    private int doctorID_Table;
+    private int patientID_Table;
 
-    public void setDoctorIDTable(int ptd) {
-        this.doctorID_Table = ptd;
+    //permes qesaj metode me mujt me marr ID e pacientit qe osht logged in te PatientWindow
+    public void setPatientIDTable(int ptd) {
+        this.patientID_Table = ptd;
     }
 
-    public int getDoctorIDTable() {
-        return doctorID_Table;
+    public int getPatientIDTable() {
+        return patientID_Table;
     }
 
-    public void returnTimeRemanining(Appointment a) {
-
-    }
-
-    public TodayFrame() {
+    /**
+     * Creates new form TodayFramePatient
+     */
+    public TodayFramePatient() {
         initComponents();
     }
 
-    public void fillLabels(String name, String dateOfBirth, String gender, String number, String location) {
-        nameText.setText(name);
-        dateOfBirthText.setText(dateOfBirth);
-        genderText.setText(gender);
-        numberText.setText(number);
-        addressText.setText(location);
-    }
     public boolean checkIfAppointmentIsToday(Appointment a) {
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
@@ -61,7 +54,7 @@ public class TodayFrame extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    
+
     public void loadTable() {
         try {
             List<Appointment> list = ar.findAll();
@@ -70,16 +63,12 @@ public class TodayFrame extends javax.swing.JInternalFrame {
             Appointment mainAppointment = findEarliestAppointment();
 
             String name = mainAppointment.getPatientID().toString();
-            String dateOfBirth = mainAppointment.getPatientID().getDateOfBirth().toString();
-            String sex = mainAppointment.getPatientID().getSex();
-            String number = mainAppointment.getPatientID().getPhoneNumber();
-            String address = mainAppointment.getPatientID().getAddress();
-            fillLabels(name, dateOfBirth, sex, number, address);
+            String date = mainAppointment.getDateTime().toString();
+            String location = mainAppointment.getLocation();
+            fillLabels(name, date, location);
 
-            
-            
             for (Appointment appointments : list) {
-                if (appointments.getDoctorID().getDoctorID() == this.doctorID_Table && checkIfAppointmentIsToday(appointments)) { 
+                if (appointments.getPatientID().getPatientID() == this.patientID_Table && checkIfAppointmentIsToday(appointments)) {
                     listByID.add(appointments);
                 }
             }
@@ -95,10 +84,12 @@ public class TodayFrame extends javax.swing.JInternalFrame {
         List<Appointment> list = ar.findAll();
         Appointment earliest = null;
         for (Appointment appointment : list) {
-            if (appointment.getDoctorID().getDoctorID() == this.doctorID_Table) {
+            if (appointment.getPatientID().getPatientID() == this.patientID_Table) {
                 for (Appointment appointment1 : list) {
-                    if (earliest == null || appointment1.getDateTime().compareTo(earliest.getDateTime()) < 0) {
-                        earliest = appointment1;
+                    if (appointment1.getPatientID().getPatientID() == this.patientID_Table) {
+                        if (earliest == null || appointment1.getDateTime().compareTo(earliest.getDateTime()) < 0) {
+                            earliest = appointment1;
+                        }
                     }
                 }
             }
@@ -107,6 +98,12 @@ public class TodayFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No Appointment found !");
         }
         return earliest;
+    }
+
+    public void fillLabels(String name, String date, String location) {
+        nameText.setText(name);
+        locationText.setText(location);
+        dateText.setText(date);
     }
 
     /**
@@ -118,28 +115,110 @@ public class TodayFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollPane = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        todayAppointmentsLabel = new javax.swing.JLabel();
         headerPanel = new javax.swing.JPanel();
         nextAppointmentLabel = new javax.swing.JLabel();
         profilePanel = new javax.swing.JPanel();
         iconLabel = new javax.swing.JLabel();
         nameText = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dateOfBirthText = new javax.swing.JLabel();
+        locationText = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        genderText = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        numberText = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        addressText = new javax.swing.JLabel();
+        dateText = new javax.swing.JLabel();
+        scrollPane = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        todayAppointmentsLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setClosable(true);
         setMaximumSize(new java.awt.Dimension(1079, 809));
         setMinimumSize(new java.awt.Dimension(1079, 809));
         setPreferredSize(new java.awt.Dimension(1079, 809));
+
+        headerPanel.setBackground(new java.awt.Color(53, 120, 229));
+
+        nextAppointmentLabel.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        nextAppointmentLabel.setForeground(new java.awt.Color(255, 255, 255));
+        nextAppointmentLabel.setText("Today's Appointments");
+
+        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
+        headerPanel.setLayout(headerPanelLayout);
+        headerPanelLayout.setHorizontalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(nextAppointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        headerPanelLayout.setVerticalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nextAppointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        profilePanel.setBackground(new java.awt.Color(250, 250, 250));
+        profilePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        iconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/user-avatar-main-picture.png"))); // NOI18N
+
+        nameText.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        nameText.setText("Name Surname");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel2.setText("Location:");
+
+        locationText.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        locationText.setText("Place");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel4.setText("Date:");
+
+        dateText.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        dateText.setText("timezone");
+
+        javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
+        profilePanel.setLayout(profilePanelLayout);
+        profilePanelLayout.setHorizontalGroup(
+            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(profilePanelLayout.createSequentialGroup()
+                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(profilePanelLayout.createSequentialGroup()
+                        .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(32, 32, 32)
+                        .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(locationText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        profilePanelLayout.setVerticalGroup(
+            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilePanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(profilePanelLayout.createSequentialGroup()
+                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(locationText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+
+        scrollPane.setMaximumSize(new java.awt.Dimension(452, 402));
+        scrollPane.setMinimumSize(new java.awt.Dimension(452, 402));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,138 +236,25 @@ public class TodayFrame extends javax.swing.JInternalFrame {
         todayAppointmentsLabel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         todayAppointmentsLabel.setText("Today's Appointments");
 
-        headerPanel.setBackground(new java.awt.Color(53, 120, 229));
-
-        nextAppointmentLabel.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        nextAppointmentLabel.setForeground(new java.awt.Color(255, 255, 255));
-        nextAppointmentLabel.setText("Next Appointment :");
-
-        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
-        headerPanel.setLayout(headerPanelLayout);
-        headerPanelLayout.setHorizontalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(nextAppointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        headerPanelLayout.setVerticalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nextAppointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        profilePanel.setBackground(new java.awt.Color(250, 250, 250));
-        profilePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        iconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons Folder/user-avatar-main-picture.png"))); // NOI18N
-
-        nameText.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        nameText.setText("Name Surname");
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("Born:");
-
-        dateOfBirthText.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        dateOfBirthText.setText("Place");
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel4.setText("Gender:");
-
-        genderText.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        genderText.setText("m OR f");
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setText("Number:");
-
-        numberText.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        numberText.setText("66-66-66");
-
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel8.setText("Address:");
-
-        addressText.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        addressText.setText("Location");
-
-        javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
-        profilePanel.setLayout(profilePanelLayout);
-        profilePanelLayout.setHorizontalGroup(
-            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(profilePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(32, 32, 32)
-                        .addComponent(dateOfBirthText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(profilePanelLayout.createSequentialGroup()
-                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(profilePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(genderText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(profilePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(numberText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(profilePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addressText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        profilePanelLayout.setVerticalGroup(
-            profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(profilePanelLayout.createSequentialGroup()
-                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dateOfBirthText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(genderText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numberText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1063, Short.MAX_VALUE)
             .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(profilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1063, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(todayAppointmentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(profilePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(todayAppointmentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -299,18 +265,14 @@ public class TodayFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addressText;
-    private javax.swing.JLabel dateOfBirthText;
-    private javax.swing.JLabel genderText;
+    private javax.swing.JLabel dateText;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel iconLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel locationText;
     private javax.swing.JLabel nameText;
     private javax.swing.JLabel nextAppointmentLabel;
-    private javax.swing.JLabel numberText;
     private javax.swing.JPanel profilePanel;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable table;

@@ -5,7 +5,9 @@
  */
 package GUI.View.Patient;
 
+import BLL.Appointment;
 import BLL.Patient;
+import DAL.AppointmentRepository;
 import DAL.HealthException;
 import DAL.PatientRepository;
 import GUI.View.General.MySettingsFrame;
@@ -17,12 +19,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
 /**
@@ -73,7 +77,7 @@ public class PatientWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         sideMenuBar = new javax.swing.JPanel();
-        menuButton = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
         appointmentsButton = new javax.swing.JButton();
         myPatients = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
@@ -109,18 +113,18 @@ public class PatientWindow extends javax.swing.JFrame {
         sideMenuBar.setMaximumSize(new java.awt.Dimension(135, 809));
         sideMenuBar.setMinimumSize(new java.awt.Dimension(135, 809));
 
-        menuButton.setBackground(new java.awt.Color(255, 255, 255));
-        menuButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        menuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MenuButton.png"))); // NOI18N
-        menuButton.setText("Home");
-        menuButton.setBorder(null);
-        menuButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        menuButton.setPreferredSize(new java.awt.Dimension(47, 15));
-        menuButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/MenuHover.png"))); // NOI18N
-        menuButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/MenuClicked.png"))); // NOI18N
-        menuButton.addActionListener(new java.awt.event.ActionListener() {
+        homeButton.setBackground(new java.awt.Color(255, 255, 255));
+        homeButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        homeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/MenuButton.png"))); // NOI18N
+        homeButton.setText("Today");
+        homeButton.setBorder(null);
+        homeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        homeButton.setPreferredSize(new java.awt.Dimension(47, 15));
+        homeButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/MenuHover.png"))); // NOI18N
+        homeButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/MenuClicked.png"))); // NOI18N
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuButtonActionPerformed(evt);
+                homeButtonActionPerformed(evt);
             }
         });
 
@@ -163,14 +167,14 @@ public class PatientWindow extends javax.swing.JFrame {
         sideMenuBar.setLayout(sideMenuBarLayout);
         sideMenuBarLayout.setHorizontalGroup(
             sideMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(appointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(myPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         sideMenuBarLayout.setVerticalGroup(
             sideMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sideMenuBarLayout.createSequentialGroup()
-                .addComponent(menuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(appointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -387,10 +391,39 @@ public class PatientWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
 
-    }//GEN-LAST:event_menuButtonActionPerformed
+        TodayFramePatient t = new TodayFramePatient();
+        terminateFrames();                                                                           ///Renditjen sbon me prish 
+        t.setPatientIDTable(this.patient_ID_Profile);
+        try {
+            if (this.patientHasAppointments()) {
+                desktopPane.add(t);
+                t.loadTable();    
+                t.show();
+            }else{
+                JOptionPane.showMessageDialog(this,"Patient has no appointment !");
+            }
+        } catch (HealthException ex) {
+        }
+        
+    }//GEN-LAST:event_homeButtonActionPerformed
 
+    public boolean patientHasAppointments() throws HealthException{
+        AppointmentRepository ar = new AppointmentRepository();
+        List<Appointment> findAll = ar.findAll();
+        ArrayList<Appointment> f2 = new ArrayList<Appointment>();
+        for (Appointment appointment : f2) {
+            if (appointment.getPatientID().getPatientID() == patient_ID_Profile) {
+                f2.add(appointment);
+            }
+        }
+        if (f2.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+    
     public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
         for (int i = 0; i < allFrames.length; i++) {
@@ -410,7 +443,6 @@ public class PatientWindow extends javax.swing.JFrame {
             app.loadTable();
             app.loadTable2();
         } catch (HealthException ex) {
-            Logger.getLogger(PatientWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
         desktopPane.add(app);
         app.show();
@@ -467,13 +499,13 @@ public class PatientWindow extends javax.swing.JFrame {
         ms.show();
     }//GEN-LAST:event_settingsButtonActionPerformed
 
-    public void putJInternalFrameInCenter(JInternalFrame ms){
+    public void putJInternalFrameInCenter(JInternalFrame ms) {
         Dimension desktopSize = desktopPane.getSize();
         Dimension jInternalFrameSize = ms.getSize();
         ms.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -516,6 +548,7 @@ public class PatientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel ddddd;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -524,7 +557,6 @@ public class PatientWindow extends javax.swing.JFrame {
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JButton menuButton;
     private javax.swing.JButton myPatients;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel phoneNumberLabel;
