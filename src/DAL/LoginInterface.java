@@ -5,6 +5,7 @@
  */
 package DAL;
 
+import BLL.Doctor;
 import BLL.Login;
 import BLL.Patient;
 import java.util.List;
@@ -17,6 +18,7 @@ public interface LoginInterface {
     Login findByID(Integer id) throws HealthException ;
     Login loginByUsernamePassowrd(String login , String password) throws HealthException ;
     void create(Login l) throws HealthException;
+    void delete(Login d) throws HealthException;
     List<Login> findAll() throws HealthException ;
     void edit(Login p) throws HealthException ;
 }

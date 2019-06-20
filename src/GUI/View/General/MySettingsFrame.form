@@ -544,31 +544,49 @@
             <Component class="javax.swing.JTextField" name="nameLabel">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="emailLabel">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="phoneNrLabel">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="sexLabel">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="AddressLabel">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="passwordLabel">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

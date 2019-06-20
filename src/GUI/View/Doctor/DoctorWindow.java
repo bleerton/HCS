@@ -100,7 +100,6 @@ public class DoctorWindow extends javax.swing.JFrame {
         requestButton = new javax.swing.JButton();
         newReportButton = new javax.swing.JButton();
         myPatientsButton = new javax.swing.JButton();
-        schedulerButton = new javax.swing.JButton();
         usernamePanel1 = new javax.swing.JPanel();
         usernameLabel1 = new javax.swing.JLabel();
         userSettings = new javax.swing.JButton();
@@ -125,20 +124,6 @@ public class DoctorWindow extends javax.swing.JFrame {
             }
         };
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -214,21 +199,6 @@ public class DoctorWindow extends javax.swing.JFrame {
             }
         });
 
-        schedulerButton.setBackground(new java.awt.Color(255, 255, 255));
-        schedulerButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        schedulerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/scheduleButton.png"))); // NOI18N
-        schedulerButton.setText("      Scheduler");
-        schedulerButton.setBorder(null);
-        schedulerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        schedulerButton.setPreferredSize(new java.awt.Dimension(47, 15));
-        schedulerButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/schedulerHover.png"))); // NOI18N
-        schedulerButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/schedulerButton.png"))); // NOI18N
-        schedulerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                schedulerButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout sideMenuBarLayout = new javax.swing.GroupLayout(sideMenuBar);
         sideMenuBar.setLayout(sideMenuBarLayout);
         sideMenuBarLayout.setHorizontalGroup(
@@ -237,7 +207,6 @@ public class DoctorWindow extends javax.swing.JFrame {
             .addComponent(requestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(newReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(myPatientsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(schedulerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         sideMenuBarLayout.setVerticalGroup(
             sideMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,9 +218,7 @@ public class DoctorWindow extends javax.swing.JFrame {
                 .addComponent(newReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(myPatientsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(schedulerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 564, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         usernamePanel1.setBackground(new java.awt.Color(250, 250, 250));
@@ -396,7 +363,7 @@ public class DoctorWindow extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(phoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)
                 .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -428,71 +395,7 @@ public class DoctorWindow extends javax.swing.JFrame {
             .addComponent(desktoPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("View");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        jMenu1.setText("Window");
-        menuBar.add(jMenu1);
-
-        jMenu2.setText("Help");
+        jMenu2.setText("    ");
         menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
@@ -568,13 +471,6 @@ public class DoctorWindow extends javax.swing.JFrame {
             a.loadTable();
     }//GEN-LAST:event_myPatientsButtonActionPerformed
 
-    private void schedulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_schedulerButtonActionPerformed
-      SchedulerFrame d = new SchedulerFrame();
-        terminateFrames();                                                                           ///Renditjen sbon me prish 
-        desktoPane.add(d);
-        d.show();
-    }//GEN-LAST:event_schedulerButtonActionPerformed
-
     private void usernameLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabel1MouseEntered
 
     }//GEN-LAST:event_usernameLabel1MouseEntered
@@ -602,10 +498,6 @@ public class DoctorWindow extends javax.swing.JFrame {
     }
     
     
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -642,24 +534,14 @@ public class DoctorWindow extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JLabel dateOfBirthLabel;
     private javax.swing.JLabel ddddd;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktoPane;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelb;
@@ -668,14 +550,9 @@ public class DoctorWindow extends javax.swing.JFrame {
     private javax.swing.JButton myPatientsButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton newReportButton;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JPanel profileInfoPanel;
     private javax.swing.JButton requestButton;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
-    private javax.swing.JButton schedulerButton;
     private javax.swing.JPanel sideMenuBar;
     private javax.swing.JButton todayButton;
     private javax.swing.JButton userSettings;

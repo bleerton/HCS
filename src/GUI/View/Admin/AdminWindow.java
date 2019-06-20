@@ -43,10 +43,10 @@ public class AdminWindow extends javax.swing.JFrame {
         addPatientButton = new javax.swing.JButton();
         userListButton = new javax.swing.JButton();
         AppointmentsButton = new javax.swing.JButton();
+        patientDetailsButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(1103, 683, 683, 683));
-        setMaximumSize(new java.awt.Dimension(1103, 659));
         setMinimumSize(new java.awt.Dimension(1103, 659));
         setResizable(false);
 
@@ -142,6 +142,11 @@ public class AdminWindow extends javax.swing.JFrame {
         patientDetailsButton.setMinimumSize(new java.awt.Dimension(321, 185));
         patientDetailsButton.setPreferredSize(new java.awt.Dimension(321, 185));
         patientDetailsButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/patientDetails.png"))); // NOI18N
+        patientDetailsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientDetailsButtonActionPerformed(evt);
+            }
+        });
 
         addDoctorButton.setBackground(new java.awt.Color(255, 255, 255));
         addDoctorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/doctorDetails.png"))); // NOI18N
@@ -174,6 +179,11 @@ public class AdminWindow extends javax.swing.JFrame {
         userListButton.setMinimumSize(new java.awt.Dimension(321, 185));
         userListButton.setPreferredSize(new java.awt.Dimension(321, 185));
         userListButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/userList.png"))); // NOI18N
+        userListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userListButtonActionPerformed(evt);
+            }
+        });
 
         AppointmentsButton.setBackground(new java.awt.Color(255, 255, 255));
         AppointmentsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/appointmentList.png"))); // NOI18N
@@ -185,6 +195,18 @@ public class AdminWindow extends javax.swing.JFrame {
         AppointmentsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AppointmentsButtonActionPerformed(evt);
+            }
+        });
+
+        patientDetailsButton1.setBackground(new java.awt.Color(255, 255, 255));
+        patientDetailsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/DoctorList.png"))); // NOI18N
+        patientDetailsButton1.setMaximumSize(new java.awt.Dimension(321, 185));
+        patientDetailsButton1.setMinimumSize(new java.awt.Dimension(321, 185));
+        patientDetailsButton1.setPreferredSize(new java.awt.Dimension(321, 185));
+        patientDetailsButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/doctorList.png"))); // NOI18N
+        patientDetailsButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientDetailsButton1ActionPerformed(evt);
             }
         });
 
@@ -204,7 +226,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(patientDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(patientDetailsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(AppointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
@@ -225,7 +248,8 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addPatientButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(patientDetailsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(patientDetailsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(patientDetailsButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(welcomePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
@@ -252,7 +276,10 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addDoctorButtonActionPerformed
 
     private void AppointmentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppointmentsButtonActionPerformed
-        // TODO add your handling code here:
+        AllAppointments aa = new AllAppointments();
+         aa.setVisible(true);
+         aa.setLocationRelativeTo(null);
+         aa.loadTable();
     }//GEN-LAST:event_AppointmentsButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
@@ -268,6 +295,24 @@ public class AdminWindow extends javax.swing.JFrame {
         ad.getTitleLabel().setText("Patient Management");
         ad.setPatientOrDoctor(3);
     }//GEN-LAST:event_addPatientButtonActionPerformed
+
+    private void patientDetailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDetailsButtonActionPerformed
+        PatientDetailsFrame pdf = new PatientDetailsFrame();
+        pdf.setVisible(true);
+        pdf.setLocationRelativeTo(null);
+        pdf.loadTable();
+    }//GEN-LAST:event_patientDetailsButtonActionPerformed
+
+    private void userListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userListButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userListButtonActionPerformed
+
+    private void patientDetailsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDetailsButton1ActionPerformed
+       DoctorListFrame dl = new DoctorListFrame();
+        dl.setVisible(true);
+        dl.setLocationRelativeTo(null);
+        dl.loadTable();
+    }//GEN-LAST:event_patientDetailsButton1ActionPerformed
 
     public void hideButtons(){
         addDoctorButton.setVisible(false);
@@ -326,6 +371,7 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton patientDetailsButton;
+    private javax.swing.JButton patientDetailsButton1;
     private javax.swing.JButton userListButton;
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JPanel welcomePanel;

@@ -48,6 +48,17 @@ public class LoginRepository extends EntMng implements LoginInterface {
             throw new HealthException("MSG:findByID " + e.getMessage());
         }
     }
+    
+    @Override
+    public void delete(Login l) throws HealthException {
+        try {
+            em.getTransaction().begin();
+            em.remove(l);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new HealthException("Msg \n" + e.getMessage());
+        }
+    }
 
     @Override
     public Login loginByUsernamePassowrd(String login, String password) throws HealthException {

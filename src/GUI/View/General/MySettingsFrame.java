@@ -294,16 +294,22 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
         });
 
         nameLabel.setEditable(false);
+        nameLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         emailLabel.setEditable(false);
+        emailLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         phoneNrLabel.setEditable(false);
+        phoneNrLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         sexLabel.setEditable(false);
+        sexLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         AddressLabel.setEditable(false);
+        AddressLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         passwordLabel.setEditable(false);
+        passwordLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -632,7 +638,6 @@ public class MySettingsFrame extends javax.swing.JInternalFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        JOptionPane.showMessageDialog(this, "You canceled you re changes");
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 

@@ -74,10 +74,8 @@ public class PatientWindow extends javax.swing.JFrame {
 
         sideMenuBar = new javax.swing.JPanel();
         menuButton = new javax.swing.JButton();
-        favouriteButton = new javax.swing.JButton();
         appointmentsButton = new javax.swing.JButton();
         myPatients = new javax.swing.JButton();
-        documentButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Background/123.jpg"));
         Image image = icon.getImage();
@@ -102,20 +100,6 @@ public class PatientWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         phoneNumberLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,21 +121,6 @@ public class PatientWindow extends javax.swing.JFrame {
         menuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuButtonActionPerformed(evt);
-            }
-        });
-
-        favouriteButton.setBackground(new java.awt.Color(255, 255, 255));
-        favouriteButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        favouriteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/FavouriteButton.png"))); // NOI18N
-        favouriteButton.setText("       Favourites");
-        favouriteButton.setBorder(null);
-        favouriteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        favouriteButton.setPreferredSize(new java.awt.Dimension(47, 15));
-        favouriteButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/FavouriteHover.png"))); // NOI18N
-        favouriteButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/FavouriteClicked.png"))); // NOI18N
-        favouriteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                favouriteButtonActionPerformed(evt);
             }
         });
 
@@ -190,44 +159,23 @@ public class PatientWindow extends javax.swing.JFrame {
             }
         });
 
-        documentButton.setBackground(new java.awt.Color(255, 255, 255));
-        documentButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        documentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/DocumentsButton.png"))); // NOI18N
-        documentButton.setText("        Documents");
-        documentButton.setBorder(null);
-        documentButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        documentButton.setPreferredSize(new java.awt.Dimension(47, 15));
-        documentButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/DocumentsHover.png"))); // NOI18N
-        documentButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Clicked/DocumentsClicked.png"))); // NOI18N
-        documentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                documentButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout sideMenuBarLayout = new javax.swing.GroupLayout(sideMenuBar);
         sideMenuBar.setLayout(sideMenuBarLayout);
         sideMenuBarLayout.setHorizontalGroup(
             sideMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(favouriteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(appointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(myPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(documentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         sideMenuBarLayout.setVerticalGroup(
             sideMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sideMenuBarLayout.createSequentialGroup()
                 .addComponent(menuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(favouriteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addComponent(appointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(myPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(documentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 564, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         mainPanel.setBackground(new java.awt.Color(250, 250, 250));
@@ -402,75 +350,14 @@ public class PatientWindow extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(phoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)
                 .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        menuBar.setMaximumSize(new java.awt.Dimension(33, 21));
+        menuBar.setMinimumSize(new java.awt.Dimension(33, 21));
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("View");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        jMenu1.setText("Window");
-        menuBar.add(jMenu1);
-
-        jMenu2.setText("Help");
+        jMenu2.setText("   ");
         menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
@@ -503,10 +390,6 @@ public class PatientWindow extends javax.swing.JFrame {
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
 
     }//GEN-LAST:event_menuButtonActionPerformed
-
-    private void favouriteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favouriteButtonActionPerformed
-
-    }//GEN-LAST:event_favouriteButtonActionPerformed
 
     public void terminateFrames() {
         JInternalFrame[] allFrames = desktopPane.getAllFrames();
@@ -546,10 +429,6 @@ public class PatientWindow extends javax.swing.JFrame {
     }
 
 
-    private void documentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentButtonActionPerformed
-        new NotificationFrame().setVisible(true);
-    }//GEN-LAST:event_documentButtonActionPerformed
-
     private void usernameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseEntered
 
     }//GEN-LAST:event_usernameLabelMouseEntered
@@ -577,10 +456,6 @@ public class PatientWindow extends javax.swing.JFrame {
 
         t.show();
     }//GEN-LAST:event_myPatientsActionPerformed
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         terminateFrames();
@@ -635,27 +510,15 @@ public class PatientWindow extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JButton appointmentsButton;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JLabel dateOfBirthLabel;
     private javax.swing.JLabel ddddd;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JButton documentButton;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JButton favouriteButton;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JLabel labelb;
     private javax.swing.JButton logoutButton;
@@ -664,12 +527,8 @@ public class PatientWindow extends javax.swing.JFrame {
     private javax.swing.JButton menuButton;
     private javax.swing.JButton myPatients;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JPanel profileInfoPanel;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JButton settingsButton;
     private javax.swing.JPanel sideMenuBar;
     private javax.swing.JLabel usernameLabel;

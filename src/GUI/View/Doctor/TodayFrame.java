@@ -9,7 +9,13 @@ import BLL.Appointment;
 import DAL.AppointmentRepository;
 import DAL.HealthException;
 import GUI.Model.AppointmentTableModel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -18,9 +24,10 @@ import javax.swing.JOptionPane;
  * @author Enis
  */
 public class TodayFrame extends javax.swing.JInternalFrame {
+
     AppointmentTableModel atm = new AppointmentTableModel();
     AppointmentRepository ar = new AppointmentRepository();
-    
+
     private int doctorID_Table;
 
     public void setDoctorIDTable(int ptd) {
@@ -30,45 +37,74 @@ public class TodayFrame extends javax.swing.JInternalFrame {
     public int getDoctorIDTable() {
         return doctorID_Table;
     }
-    
+
+    public void returnTimeRemanining(Appointment a) {
+
+    }
+
     public TodayFrame() {
         initComponents();
     }
-    
-    public void fillLabels(String name,String dateOfBirth,String gender,String number,String location){
+
+    public void fillLabels(String name, String dateOfBirth, String gender, String number, String location) {
         nameText.setText(name);
         dateOfBirthText.setText(dateOfBirth);
         genderText.setText(gender);
         numberText.setText(number);
         addressText.setText(location);
     }
+//    public boolean checkIfAppointmentIsToday(Appointment a) {
+//        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+//        Calendar calendar = Calendar.getInstance();
+//        return dateformat.format(calendar.getTime());
+//    }
     
     public void loadTable() {
         try {
             List<Appointment> list = ar.findAll();
             // E KOM KRIJU NI LIST T RE PER ME TA QIT LISTEN E APPOINTMENTS VEQ PER QAT PACIENT QE OSHT LOGGED IN
             ArrayList<Appointment> listByID = new ArrayList<>();
-            for (Appointment appointment : list) {
-                if ((appointment.getDoctorID().getDoctorID()) == this.doctorID_Table) {
-//                    if (appointment.getDateTime().equals()) {     //QITU DUHET ME BO NESE I TAKON DATES SE SOTIT
-                        String name = appointment.getPatientID().toString();
-                        String dateOfBirth = appointment.getPatientID().getDateOfBirth().toString();
-                        String sex = appointment.getPatientID().getSex();
-                        String number = appointment.getPatientID().getPhoneNumber();
-                        String address = appointment.getPatientID().getAddress();
-                        
-                        fillLabels(name, dateOfBirth, sex, number, address);
-                        listByID.add(appointment);
-//                    }
-                    
+            Appointment mainAppointment = findEarliestAppointment();
+
+            String name = mainAppointment.getPatientID().toString();
+            String dateOfBirth = mainAppointment.getPatientID().getDateOfBirth().toString();
+            String sex = mainAppointment.getPatientID().getSex();
+            String number = mainAppointment.getPatientID().getPhoneNumber();
+            String address = mainAppointment.getPatientID().getAddress();
+            fillLabels(name, dateOfBirth, sex, number, address);
+
+            
+            
+            for (Appointment appointments : list) {
+                if (appointments.getDoctorID().getDoctorID() == this.doctorID_Table) { 
+                    listByID.add(appointments);
                 }
             }
+
             atm.addList(listByID);
             table.setModel(atm);
             atm.fireTableDataChanged();
         } catch (HealthException ex) {
             JOptionPane.showMessageDialog(this, "Info:" + ex.getMessage());
         }
+    }
+
+    public Appointment findEarliestAppointment() throws HealthException {
+        List<Appointment> list = ar.findAll();
+        Appointment earliest = null;
+        for (Appointment appointment : list) {
+            if (appointment.getDoctorID().getDoctorID() == this.doctorID_Table) {
+                for (Appointment appointment1 : list) {
+                    if (earliest == null || appointment1.getDateTime().compareTo(earliest.getDateTime()) < 0) {
+                        earliest = appointment1;
+                    }
+                }
+            }
+        }
+        if (earliest == null) {
+            JOptionPane.showMessageDialog(this, "No Appointment found !");
+        }
+        return earliest;
     }
 
     /**
