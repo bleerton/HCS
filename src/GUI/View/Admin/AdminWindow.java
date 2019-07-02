@@ -6,6 +6,9 @@
 package GUI.View.Admin;
 
 import GUI.View.General.StartingPage;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  *
@@ -41,9 +44,9 @@ public class AdminWindow extends javax.swing.JFrame {
         patientDetailsButton = new javax.swing.JButton();
         addDoctorButton = new javax.swing.JButton();
         addPatientButton = new javax.swing.JButton();
-        userListButton = new javax.swing.JButton();
         AppointmentsButton = new javax.swing.JButton();
         patientDetailsButton1 = new javax.swing.JButton();
+        myReportsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(1103, 683, 683, 683));
@@ -173,18 +176,6 @@ public class AdminWindow extends javax.swing.JFrame {
             }
         });
 
-        userListButton.setBackground(new java.awt.Color(255, 255, 255));
-        userListButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/userList.png"))); // NOI18N
-        userListButton.setMaximumSize(new java.awt.Dimension(321, 185));
-        userListButton.setMinimumSize(new java.awt.Dimension(321, 185));
-        userListButton.setPreferredSize(new java.awt.Dimension(321, 185));
-        userListButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/userList.png"))); // NOI18N
-        userListButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userListButtonActionPerformed(evt);
-            }
-        });
-
         AppointmentsButton.setBackground(new java.awt.Color(255, 255, 255));
         AppointmentsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/appointmentList.png"))); // NOI18N
         AppointmentsButton.setMaximumSize(new java.awt.Dimension(321, 185));
@@ -210,6 +201,18 @@ public class AdminWindow extends javax.swing.JFrame {
             }
         });
 
+        myReportsButton.setBackground(new java.awt.Color(255, 255, 255));
+        myReportsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/ButtonBackground/myreports.png"))); // NOI18N
+        myReportsButton.setMaximumSize(new java.awt.Dimension(321, 185));
+        myReportsButton.setMinimumSize(new java.awt.Dimension(321, 185));
+        myReportsButton.setPreferredSize(new java.awt.Dimension(321, 185));
+        myReportsButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ButtonsFolder/Hovers/myreports.png"))); // NOI18N
+        myReportsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myReportsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -226,13 +229,13 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(patientDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(patientDetailsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(myReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(AppointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(userListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(patientDetailsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,12 +247,12 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addDoctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AppointmentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(patientDetailsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addPatientButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(patientDetailsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(patientDetailsButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(myReportsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(welcomePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
@@ -303,10 +306,6 @@ public class AdminWindow extends javax.swing.JFrame {
         pdf.loadTable();
     }//GEN-LAST:event_patientDetailsButtonActionPerformed
 
-    private void userListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userListButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userListButtonActionPerformed
-
     private void patientDetailsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDetailsButton1ActionPerformed
        DoctorListFrame dl = new DoctorListFrame();
         dl.setVisible(true);
@@ -314,16 +313,40 @@ public class AdminWindow extends javax.swing.JFrame {
         dl.loadTable();
     }//GEN-LAST:event_patientDetailsButton1ActionPerformed
 
-    public void hideButtons(){
-        addDoctorButton.setVisible(false);
-         AppointmentsButton.setVisible(false);
-         addPatientButton.setVisible(false);
-         userListButton.setVisible(false);
-         patientDetailsButton.setVisible(false);
-         logoutButton.setVisible(false);
-         headerPanel.setVisible(false);
-         welcomePanel.setVisible(false);
+    private void myReportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myReportsButtonActionPerformed
+        MyReportsFrame mr = new MyReportsFrame();
+        mr.setVisible(true);
+        mr.setLocationRelativeTo(null);
+    }//GEN-LAST:event_myReportsButtonActionPerformed
+
+    public void ReportTemplate(String SqlStatement, String path) {
+        try {
+
+            JasperDesign jd = JRXmlLoader.load(path);
+            JRDesignQuery query = new JRDesignQuery();
+            query.setText(SqlStatement);
+            jd.setQuery(query);
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, source.getConnection());
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
+    
+//    public void hideButtons(){
+//        addDoctorButton.setVisible(false);
+//         AppointmentsButton.setVisible(false);
+//         addPatientButton.setVisible(false);
+//         userListButton.setVisible(false);
+//         patientDetailsButton.setVisible(false);
+//         logoutButton.setVisible(false);
+//         headerPanel.setVisible(false);
+//         welcomePanel.setVisible(false);
+//    }
     
     /**
      * @param args the command line arguments
@@ -370,9 +393,9 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton myReportsButton;
     private javax.swing.JButton patientDetailsButton;
     private javax.swing.JButton patientDetailsButton1;
-    private javax.swing.JButton userListButton;
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JPanel welcomePanel;
     // End of variables declaration//GEN-END:variables
