@@ -581,7 +581,7 @@ public class DoctorReportForm extends javax.swing.JInternalFrame {
                 Logger.getLogger(DoctorReportForm.class.getName()).log(Level.SEVERE, null, ex);
             }
 //            diagnosisText.setText(r.getDiagnose());
-            if (!Report.exists(r)) {
+            if (!Report.exist(r)) {
                 JOptionPane.showMessageDialog(this,"Report to this ID sent!");
                 clearFields();
                 rr.create(r);

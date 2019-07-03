@@ -10,7 +10,6 @@ import DAL.RequestRepository;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Request")
@@ -105,23 +104,23 @@ public class Request implements Serializable {
     public void setPatientID(Patient patientID) {
         this.patientID = patientID;
     }
+    
+    public static boolean exist(Request a) throws HealthException{
+        RequestRepository ar = new RequestRepository();
+        List<Request> all = ar.findAll();
+        for (Request appointment : all) {
+            if (appointment.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && appointment.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }
-    
-    public static boolean exists(Request r) throws HealthException {
-        RequestRepository rr = new RequestRepository();
-        List<Request> all = rr.findAll();
-        for (Request request : all) {
-            if (Objects.equals(request.doctorID.getDoctorID(), r.doctorID.getDoctorID()) && Objects.equals(request.patientID.getPatientID(), r.patientID.getPatientID()) && request.getStatus().equalsIgnoreCase("Pending")) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

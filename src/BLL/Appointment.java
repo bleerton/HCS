@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Appointment")
@@ -92,6 +92,14 @@ public class Appointment implements Serializable {
     public Integer getAppointmentID() {
         return appointmentID;
     }
+
+    public void setAppointmentID(Integer appointmentID) {
+        this.appointmentID = appointmentID;
+    }
+
+    public String getFirstNameOfPatient() {
+        return firstNameOfPatient;
+    }
     
     public static boolean exist(Appointment a) throws HealthException{
         AppointmentRepository ar = new AppointmentRepository();
@@ -102,14 +110,6 @@ public class Appointment implements Serializable {
             }
         }
         return false;
-    }
-
-    public void setAppointmentID(Integer appointmentID) {
-        this.appointmentID = appointmentID;
-    }
-
-    public String getFirstNameOfPatient() {
-        return firstNameOfPatient;
     }
 
     public void setFirstNameOfPatient(String firstNameOfPatient) {

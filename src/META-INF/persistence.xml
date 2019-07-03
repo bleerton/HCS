@@ -2,21 +2,19 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="HealthCarePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>BLL.Report</class>
-    <class>BLL.Login</class>
-    <class>BLL.Doctor</class>
-    <class>BLL.Appointment</class>
-    <class>BLL.Patient</class>
-    <class>BLL.Administrator</class>
-    <class>BLL.Sysdiagrams</class>
-    <class>BLL.RequestedAppointments</class>
     <class>BLL.Request</class>
+    <class>BLL.Report</class>
+    <class>BLL.Administrator</class>
+    <class>BLL.Doctor</class>
     <class>BLL.Connection</class>
+    <class>BLL.Appointment</class>
+    <class>BLL.Login</class>
+    <class>BLL.Patient</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=HealthCareScheduling"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-      <property name="javax.persistence.jdbc.password" value="sa"/>
+      <property name="javax.persistence.jdbc.password" value="as"/>
     </properties>
   </persistence-unit>
 </persistence>

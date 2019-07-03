@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Patient")
@@ -47,12 +47,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password")
     , @NamedQuery(name = "Patient.findByParentName", query = "SELECT p FROM Patient p WHERE p.parentName = :parentName")})
 public class Patient implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
-    private Collection<Request> requestCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
-    private Collection<Report> reportCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -91,6 +85,14 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @Column(name = "ParentName")
     private String parentName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Appointment> appointmentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Report> reportCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Connection> connectionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientID")
+    private Collection<Request> requestCollection;
     @JoinColumn(name = "LoginId", referencedColumnName = "LoginID")
     @ManyToOne
     private Login loginId;
@@ -203,6 +205,42 @@ public class Patient implements Serializable {
         this.parentName = parentName;
     }
 
+    @XmlTransient
+    public Collection<Appointment> getAppointmentCollection() {
+        return appointmentCollection;
+    }
+
+    public void setAppointmentCollection(Collection<Appointment> appointmentCollection) {
+        this.appointmentCollection = appointmentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Report> getReportCollection() {
+        return reportCollection;
+    }
+
+    public void setReportCollection(Collection<Report> reportCollection) {
+        this.reportCollection = reportCollection;
+    }
+
+    @XmlTransient
+    public Collection<Connection> getConnectionCollection() {
+        return connectionCollection;
+    }
+
+    public void setConnectionCollection(Collection<Connection> connectionCollection) {
+        this.connectionCollection = connectionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Request> getRequestCollection() {
+        return requestCollection;
+    }
+
+    public void setRequestCollection(Collection<Request> requestCollection) {
+        this.requestCollection = requestCollection;
+    }
+
     public Login getLoginId() {
         return loginId;
     }
@@ -233,25 +271,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return firstName+" "+lastName;
-    }
-
-    @XmlTransient
-    public Collection<Report> getReportCollection() {
-        return reportCollection;
-    }
-
-    public void setReportCollection(Collection<Report> reportCollection) {
-        this.reportCollection = reportCollection;
-    }
-
-    @XmlTransient
-    public Collection<Request> getRequestCollection() {
-        return requestCollection;
-    }
-
-    public void setRequestCollection(Collection<Request> requestCollection) {
-        this.requestCollection = requestCollection;
+        return "BLL.Patient[ patientID=" + patientID + " ]";
     }
     
 }

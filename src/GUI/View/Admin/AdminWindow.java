@@ -5,10 +5,21 @@
  */
 package GUI.View.Admin;
 
+import BLL.DConnection;
 import GUI.View.General.StartingPage;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static jdk.nashorn.internal.objects.NativeRegExp.source;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -16,6 +27,8 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
  */
 public class AdminWindow extends javax.swing.JFrame {
 
+    
+    DConnection source = new DConnection();
     /**
      * Creates new form AdminWindow
      */
@@ -319,7 +332,7 @@ public class AdminWindow extends javax.swing.JFrame {
         mr.setLocationRelativeTo(null);
     }//GEN-LAST:event_myReportsButtonActionPerformed
 
-    public void ReportTemplate(String SqlStatement, String path) {
+     public void ReportTemplateAll(String SqlStatement, String path) {
         try {
 
             JasperDesign jd = JRXmlLoader.load(path);
@@ -327,8 +340,9 @@ public class AdminWindow extends javax.swing.JFrame {
             query.setText(SqlStatement);
             jd.setQuery(query);
             JasperReport jr = JasperCompileManager.compileReport(jd);
-            JasperPrint jp = JasperFillManager.fillReport(jr, param, source.getConnection());
+            JasperPrint jp = JasperFillManager.fillReport(jr,null, source.getConnection());  //boja 1 test  sa jom knej
             JasperViewer.viewReport(jp, false);
+            //e di qe ta kem tesh 
         } catch (JRException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -399,4 +413,8 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JPanel welcomePanel;
     // End of variables declaration//GEN-END:variables
+
+    void ReportTemplateAll(String select__from_Patient_WHERE_Sex__Female_) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

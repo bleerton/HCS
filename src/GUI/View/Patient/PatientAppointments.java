@@ -387,7 +387,7 @@ public class PatientAppointments extends javax.swing.JInternalFrame {
                     return;
                 }
             }
-            if (!Request.exists(r)) {
+            if (!Request.exist(r)) {
                 rr.create(r);
             } else {
                 JOptionPane.showMessageDialog(this, "U already requested to this doctor !");

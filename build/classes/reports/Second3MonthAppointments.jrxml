@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f3662b0-4992-434a-9a30-e800bfea0be1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM Appointment WHERE DateTime BETWEEN '2019-04-01' AND '2019-06-30']]>
+	</queryString>
+	<field name="AppointmentID" class="java.lang.Integer"/>
+	<field name="PatientID" class="java.lang.Integer"/>
+	<field name="First_Name_Of_Patient" class="java.lang.String"/>
+	<field name="Last_Name_Of_Patient" class="java.lang.String"/>
+	<field name="Location" class="java.lang.String"/>
+	<field name="DateTime" class="java.sql.Timestamp"/>
+	<field name="DoctorID" class="java.lang.Integer"/>
+	<field name="Note" class="java.lang.String"/>
+	<field name="Status" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="c929d2e0-2511-4bfd-a185-8145bba42370"/>
+				<staticText>
+					<reportElement x="20" y="20" width="486" height="43" forecolor="#FFFFFF" uuid="855f6004-d8d5-44d0-a412-d7f676bf9334"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[April-June Appointments]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="18e2ea26-4eda-43c3-b810-32f7e623887f"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="76" y="0" width="109" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c868e4be-0e1c-47eb-a7ff-2eeb2ee979a0"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="185" y="0" width="132" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7229c180-4cdf-477f-99c7-f6bdc18b335f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Surname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="317" y="0" width="97" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="514f27df-dc3b-4fd9-a32e-0fc28794831a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Location]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b71c569e-aeda-4cc3-9637-621dd1585863"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DateTime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="76" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b2ba70d2-e154-4871-b217-89d8e920493f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nr.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="5e0a54b8-deab-4dac-a55d-ad7020f8862a"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="76" y="0" width="62" height="20" uuid="cc392610-fe18-467b-8a7c-f59babd4b072"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{First_Name_Of_Patient}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="185" y="0" width="122" height="20" uuid="4ffbbeda-ea57-497b-af38-4a1e039cd1ff"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Last_Name_Of_Patient}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="317" y="0" width="97" height="20" uuid="0900bee7-310a-4fb0-af3b-6ab3014d23b2"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Location}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="414" y="0" width="138" height="20" uuid="d8e143f5-56ac-4c55-90fd-e6957c9306ab"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DateTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="0" width="100" height="20" uuid="f41bd500-42b8-4e84-ab4b-0f239af021ca"/>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="e20591d4-3c83-418b-a052-fc9d3a3c2c8e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="60052227-8a75-4fb5-bec1-88539c876265"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="10e8e63c-1182-4196-85fa-029a1d8d3f2c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

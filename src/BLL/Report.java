@@ -10,7 +10,6 @@ import DAL.ReportRepository;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Report")
@@ -136,6 +135,17 @@ public class Report implements Serializable {
     public void setDiagnose(String diagnose) {
         this.diagnose = diagnose;
     }
+    
+    public static boolean exist(Report a) throws HealthException{
+        ReportRepository ar = new ReportRepository();
+        List<Report> all = ar.findAll();
+        for (Report appointment : all) {
+            if (appointment.getDoctorID().getDoctorID() == a.getDoctorID().getDoctorID() && appointment.getPatientID().getPatientID() == a.getPatientID().getPatientID()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public Doctor getDoctorID() {
         return doctorID;
@@ -160,17 +170,6 @@ public class Report implements Serializable {
         return hash;
     }
 
-    public static boolean exists(Report r) throws HealthException {
-        ReportRepository rr = new ReportRepository();
-        List<Report> all = rr.findAll();
-        for (Report report : all) {
-            if (Objects.equals(report.doctorID.getDoctorID(), r.doctorID.getDoctorID()) && Objects.equals(report.patientID.getPatientID(), r.patientID.getPatientID())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -186,7 +185,7 @@ public class Report implements Serializable {
 
     @Override
     public String toString() {
-        return reportID+" - "+getDoctorID().getFirstName();
+        return "BLL.Report[ reportID=" + reportID + " ]";
     }
     
 }

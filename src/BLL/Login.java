@@ -5,8 +5,8 @@
  */
 package BLL;
 
-import DAL.LoginRepository;
 import DAL.HealthException;
+import DAL.LoginRepository;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Login")
@@ -142,17 +142,6 @@ public class Login implements Serializable {
         return hash;
     }
 
-    public static boolean exists(Login a) throws HealthException{
-        LoginRepository lr = new LoginRepository();
-        List<Login> all = lr.findAll();
-        for (Login logins : all) {
-            if (logins.getUsername().equalsIgnoreCase(a.username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -166,9 +155,20 @@ public class Login implements Serializable {
         return true;
     }
 
+    public static boolean exists(Login a) throws HealthException {
+        LoginRepository lr = new LoginRepository();
+        List<Login> all = lr.findAll();
+        for (Login logins : all) {
+            if (logins.getUsername().equalsIgnoreCase(a.username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "BLL.Login[ loginID=" + loginID + " ]";
     }
-    
+
 }

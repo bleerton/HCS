@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Enis
+ * @author bleer
  */
 @Entity
 @Table(name = "Administrator")
@@ -201,5 +201,5 @@ public class Administrator implements Serializable {
     public String toString() {
         return "BLL.Administrator[ administratorID=" + administratorID + " ]";
     }
-    
+
 }
